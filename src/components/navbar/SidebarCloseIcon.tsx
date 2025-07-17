@@ -1,7 +1,7 @@
 import React from 'react'
 import { ImCross } from "react-icons/im";
 import type { SidebarContextType } from '../../types';
-import { useSidebarContext } from '../../Contexts/SidebarContext';
+import { useSidebarContext } from '../../contexts/SidebarContext';
 
 const SidebarCloseIcon = () => {
   const context:SidebarContextType = useSidebarContext();

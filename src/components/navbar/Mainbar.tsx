@@ -1,8 +1,8 @@
 import React from 'react'
 import Navlink from './Navlink'
 import BrandLink from './BrandLink'
-import HideFlexOnSmallSize from '../utils/HideFlexOnSmallSize'
-import ShowFlexOnSmallSize from '../utils/ShowFlexOnSmallSize'
+import HideFlexOnSmallSize from '../utilComponents/HideFlexOnSmallSize'
+import ShowFlexOnSmallSize from '../utilComponents/ShowFlexOnSmallSize'
 import NavMenuIcon from './NavMenuIcon'
 
 const Mainbar = () => {

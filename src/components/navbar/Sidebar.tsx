@@ -2,7 +2,7 @@ import React from 'react'
 import Navlink from './Navlink'
 import SidebarCloseIcon from './SidebarCloseIcon'
 import type { SidebarContextType } from '../../types'
-import { useSidebarContext } from '../../Contexts/SidebarContext'
+import { useSidebarContext } from '../../contexts/SidebarContext'
 
 const Sidebar = () => {
   const context:SidebarContextType = useSidebarContext();

@@ -1,13 +1,13 @@
 import React from 'react'
-import type { ShowCardProps } from '../types';
+import type { ShowCardProps } from '../../types';
 import { FaStar } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa";
 
-const ShowCard = ({imgSrc,rating,year,name}:ShowCardProps) => {
+const ShowCard = ({imgSrc,rating,year,title: name}:ShowCardProps) => {
     return (
         <div className='w-60 min-h-96 bg-gray-800 flex items-center flex-col gap-3'>
-            <div className='w-full h-72'><img src={imgSrc} alt="poster-img"className='w-full h-full' /></div>
-            <div className=' w-full flex flex-col gap-2'>
+            <div className='w-full h-72 hover:cursor-pointer'><img src={imgSrc} alt="poster-img"className='w-full h-full' /></div>
+            <div className=' w-full flex flex-col gap-2 pr-1 pl-1'>
                 <div className='w-full flex gap-7'>
                     <div className='flex items-center justify-center gap-1'>
                         <FaStar className='text-cyan-500' />

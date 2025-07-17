@@ -1,7 +1,7 @@
 import React from 'react'
 import { IoMdMenu } from "react-icons/io";
 import type { SidebarContextType } from '../../types';
-import { useSidebarContext } from '../../Contexts/SidebarContext';
+import { useSidebarContext } from '../../contexts/SidebarContext';
 
 const NavMenuIcon = () => {
     const context:SidebarContextType = useSidebarContext();

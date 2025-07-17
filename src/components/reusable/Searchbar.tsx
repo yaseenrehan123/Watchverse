@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import { FaSearch } from "react-icons/fa";
-import { useSearchContext } from '../Contexts/SearchContext';
+import { useSearchContext } from '../../contexts/SearchContext';
 const Searchbar = () => {
     const {searchValue,setSearchValue} = useSearchContext();
-    useEffect(()=>{
-        console.log(searchValue);
-    },[searchValue])
+
   return (
     <div className='flex justify-center items-center gap-1 bg-gray-900 h-10 min-w-52 max-w-4xl w-full'>
         <div className='h-full bg-gray-800 flex items-center justify-center w-10'>

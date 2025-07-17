@@ -1,0 +1,1 @@
+export const TMDB_FILTERS = ['POPULAR', 'TRENDING' , 'NEW'] as const;
