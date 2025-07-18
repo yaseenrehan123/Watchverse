@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import type { Status, TMDBResponse, useTMDBDATAOptions, useTMDBDataResult } from "../types";
 import { useDebouncedSearchContext } from "../contexts/DebouncedSearchContext";
+import { useMediaTypeContext } from "../contexts/MediaTypeContext";
+import { useMediaFilterContext } from "../contexts/MediaFilterContext";
 
-export default function useTMDBDATA({ type, filter }: useTMDBDATAOptions): useTMDBDataResult {
+export default function useTMDBDATA(): useTMDBDataResult {
     const [moviesData, setMoviesData] = useState<TMDBResponse | undefined>();
     const [status, setStatus] = useState<Status | undefined>();
     const {debouncedSearchValue} = useDebouncedSearchContext();
+    const {type} = useMediaTypeContext();
+    const {filter} = useMediaFilterContext();
     useEffect(() => {
         const query:string = debouncedSearchValue;
         const BASE_URL: string = query ?

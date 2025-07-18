@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import type { MediaFilterDropdownProps, TMDBFilterType } from '../../types'
 import { TMDB_FILTERS } from '../../utils/filters';
+import { useMediaFilterContext } from '../../contexts/MediaFilterContext';
 
-const MediaFilterDropdown = ({selected,onSelect}:MediaFilterDropdownProps) => {
+const MediaFilterDropdown = () => {
+  const {filter,setFilter} = useMediaFilterContext();
   const [open,setOpen] = useState<boolean>(false);
   const handleSelect =(value:TMDBFilterType) => {
-    onSelect(value);
+    setFilter(value);
     setOpen(false);
   }
   return (
@@ -13,7 +15,7 @@ const MediaFilterDropdown = ({selected,onSelect}:MediaFilterDropdownProps) => {
     hover:cursor-pointer hover:bg-gray-900 transition-all duration-150 relative'>
       <button className='hover:cursor-pointer hover:text-cyan-500 font-roboto text-[20px] text-center w-full h-12'
       onClick={()=>setOpen(prev=> !prev)}>
-        {selected.charAt(0) + selected.slice(1).toLowerCase()}
+        {filter.charAt(0) + filter.slice(1).toLowerCase()}
       </button>
       {open && (
         <div className="w-full bg-gray-800 rounded-xl shadow-lg z-10">

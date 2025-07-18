@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react'
-import type { MediaContainerProps, TMDBItem, useTMDBDataResult } from '../../types'
+import React from 'react'
+import type {  TMDBItem, useTMDBDataResult } from '../../types'
 import MediaLoadingText from '../utilComponents/MediaLoadingText';
 import MediaErrorText from '../utilComponents/MediaErrorText';
 import ShowCard from './ShowCard';
-import useTMDBDATA from '../../Hooks/useTMDBData';
+import useTMDBDATA from '../../hooks/useTMDBData';
 
-const MediaContainer = ({type,filter}:MediaContainerProps) => {
-    const { data, status }: useTMDBDataResult = useTMDBDATA({
-        type:type,
-        filter:filter
-    });
-    useEffect(()=>{
-        console.log("MEDIA FILTER CHANGED!",filter)
-    },[filter])
+const MediaContainer = () => {
+    const { data, status }: useTMDBDataResult = useTMDBDATA();
+  
     if (status.state === 'Loading') {
         return <MediaLoadingText content='Loading...' />
     }

@@ -3,7 +3,6 @@ import HomeHeader from '../headers/HomeHeader'
 import HomeContent from '../content/HomeContent'
 import useClearSearchOnLoad from '../../hooks/useClearSearchOnLoad'
 
-
 const HomePage = () => {
     useClearSearchOnLoad();
     return (

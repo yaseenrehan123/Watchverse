@@ -10,11 +10,11 @@ const HomeContent = () => {
   return (
     <div className='flex items-center flex-col gap-5'>
         <div className='flex items-center pl-24 gap-5 w-full'>
-                <MediaFilterDropdown selected={filter} onSelect={setFilter}/>
-                <ContentTypeSelection selected={contentType} onSelect={setContentType}/>
+                <MediaFilterDropdown/>
+                <ContentTypeSelection/>
             </div>
             
-            <MediaContainer type={contentType} filter={filter}/>
+            <MediaContainer/>
     </div>
   )
 }

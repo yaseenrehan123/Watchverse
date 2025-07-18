@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import type { ShowCardProps } from '../../types';
 import { FaStar } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa";
 
 const ShowCard = ({imgSrc,rating,year,title: name}:ShowCardProps) => {
+    const [imgError,setImageError] = useState<boolean>(false);
     return (
         <div className='w-60 min-h-96 bg-gray-800 flex items-center flex-col gap-3'>
-            <div className='w-full h-72 hover:cursor-pointer'><img src={imgSrc} alt="poster-img"className='w-full h-full' /></div>
+            <div className='w-full h-72 hover:cursor-pointer'>
+                {!imgError && imgSrc ? (<img src={imgSrc} alt="poster-img"className='w-full h-full'  onError={()=>setImageError(true)}/>)
+                : (<div className='w-full h-full bg-gray-900 flex items-center justify-center'><p className='text-2xl font-roboto'>Poster Not Available</p></div>)
+                }
+            </div>
             <div className=' w-full flex flex-col gap-2 pr-1 pl-1'>
                 <div className='w-full flex gap-7'>
                     <div className='flex items-center justify-center gap-1'>

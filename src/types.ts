@@ -26,6 +26,14 @@ export type SidebarContextType = {
 export type DebouncedSearchContextType = {
   debouncedSearchValue: string
 }
+export type MediaTypeContextType = {
+  type:TMDBFetchType,
+  setType:(value:TMDBFetchType) => void
+}
+export type MediaFilterContextType = {
+  filter:TMDBFilterType,
+  setFilter:(value:TMDBFilterType) => void
+}
 //PROPS
 export type NavlinkProps = {
   content: string,
@@ -37,18 +45,6 @@ export type ShowCardProps = {
   year: string,
   title: string
 };
-export type MediaContainerProps = {
-  type: TMDBFetchType,
-  filter?: TMDBFilterType
-}
-export type MediaFilterDropdownProps = {
-  selected: TMDBFilterType,
-  onSelect: (value: TMDBFilterType) => void;
-}
-export type ContentTypeSelectionProps = {
-  selected: TMDBFetchType,
-  onSelect: (value: TMDBFetchType) => void
-}
 export type RedirectingSearchbarProps = {
   path: string
 }
