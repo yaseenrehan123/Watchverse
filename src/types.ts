@@ -24,7 +24,8 @@ export type SidebarContextType = {
   setEnabled: Function
 };
 export type DebouncedSearchContextType = {
-  debouncedSearchValue: string
+  debouncedSearchValue: string,
+  setDebouncedSearchValue:(val:string)=>void
 }
 export type MediaTypeContextType = {
   type:TMDBFetchType,

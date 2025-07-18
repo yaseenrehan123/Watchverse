@@ -11,7 +11,7 @@ export function DebouncedSearchContextProvider({children}:{children:React.ReactN
     useDebounce(()=>setDebouncedSearchValue(searchValue),500,[searchValue])
 
     return(
-        <DebouncedSearchContext.Provider value={{debouncedSearchValue:debouncedSearchValue}}>
+        <DebouncedSearchContext.Provider value={{debouncedSearchValue:debouncedSearchValue,setDebouncedSearchValue:setDebouncedSearchValue}}>
             {children}
         </DebouncedSearchContext.Provider>
     )
