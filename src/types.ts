@@ -49,6 +49,16 @@ export type ShowCardProps = {
 export type RedirectingSearchbarProps = {
   path: string
 }
+export type MediaPaginationProps = {
+  totalPages:number,
+  currentPage:number,
+  setPage:(val:number)=>void
+}
+export type MediaPaginationButtonProps = {
+  content:string,
+  selected:boolean,
+  onClick:()=>void
+}
 //HOOK TYPES
 export type TMDBResponse = {
   page: number;

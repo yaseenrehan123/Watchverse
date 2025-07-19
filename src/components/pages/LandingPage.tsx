@@ -3,7 +3,7 @@ import Searchbar from '../reusable/Searchbar'
 import FAQ from '../faq/FAQ'
 import ViewFullSiteBtn from '../buttons/ViewFullSiteBtn'
 import RedirectingSearchbar from '../reusable/RedirectingSearchbar'
-import LandingPageHeader from '../content/LandingPageHeader'
+import LandingPageHeader from '../headers/LandingPageHeader'
 
 const LandingPage = () => {
   return (

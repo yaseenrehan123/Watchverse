@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type {  TMDBItem, useTMDBDataResult } from '../../types'
 import MediaLoadingText from '../utilComponents/MediaLoadingText';
 import MediaErrorText from '../utilComponents/MediaErrorText';
 import ShowCard from './ShowCard';
 import useTMDBDATA from '../../hooks/useTMDBData';
+import MediaPagination from './MediaPagination';
 
 const MediaContainer = () => {
-    const { data, status }: useTMDBDataResult = useTMDBDATA();
+    const [page, setPage] = useState<number>(1);
+    const { data, status }: useTMDBDataResult = useTMDBDATA(page);
   
     if (status.state === 'Loading') {
         return <MediaLoadingText content='Loading...' />
@@ -26,6 +28,7 @@ const MediaContainer = () => {
                     title={item.title}
                     />
                 ))}
+                <MediaPagination totalPages={data?.total_pages ?? 1} currentPage={page} setPage={setPage}/>
             </div>
         )
     }

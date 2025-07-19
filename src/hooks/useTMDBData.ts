@@ -4,7 +4,7 @@ import { useDebouncedSearchContext } from "../contexts/DebouncedSearchContext";
 import { useMediaTypeContext } from "../contexts/MediaTypeContext";
 import { useMediaFilterContext } from "../contexts/MediaFilterContext";
 
-export default function useTMDBDATA(): useTMDBDataResult {
+export default function useTMDBDATA(page: number = 1): useTMDBDataResult {
     const [moviesData, setMoviesData] = useState<TMDBResponse | undefined>();
     const [status, setStatus] = useState<Status | undefined>();
     const {debouncedSearchValue} = useDebouncedSearchContext();
@@ -37,8 +37,8 @@ export default function useTMDBDATA(): useTMDBDataResult {
             try {
                 setStatus({ state: 'Loading' });
                 const endpoint: string = query  
-                    ? `${BASE_URL}?query=${encodeURIComponent(query)}`
-                    : `${BASE_URL}?${FILTER}`;
+                    ? `${BASE_URL}?query=${encodeURIComponent(query)}&page=${page}`
+                    : `${BASE_URL}?${FILTER}&page=${page}`;
                 const response = await fetch(endpoint, OPTIONS);
                 if (!response.ok) {
                     setStatus({ state: 'Error', message: 'Something went wrong...' });
@@ -54,7 +54,7 @@ export default function useTMDBDATA(): useTMDBDataResult {
             }
         };
         fetchMovies();
-    }, [type, filter,debouncedSearchValue]);
+    }, [type, filter,debouncedSearchValue,page]);
 
     if (!status) {
         return {

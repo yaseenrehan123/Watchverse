@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LandingPage from './components/pages/LandingPage'
 import Layout from './components/Layout'
 import NotFoundPage from './components/pages/NotFoundPage'
+import MoviesPage from './components/pages/MoviesPage'
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
     children:[
       {index:true, element:<LandingPage/>},
       {path:'home',element:<HomePage/>},
-      
+      {path:'movies',element:<MoviesPage/>}
     ],
     errorElement:<NotFoundPage/>
   }

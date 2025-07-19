@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { MediaFilterDropdownProps, TMDBFilterType } from '../../types'
+import type {TMDBFilterType } from '../../types'
 import { TMDB_FILTERS } from '../../utils/filters';
 import { useMediaFilterContext } from '../../contexts/MediaFilterContext';
 

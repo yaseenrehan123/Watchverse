@@ -7,7 +7,7 @@ import { useSidebarContext } from '../../contexts/SidebarContext'
 const Sidebar = () => {
   const context:SidebarContextType = useSidebarContext();
   return (
-    <div className={` fixed top-0 right-0 h-full w-50 bg-black/85 ${context.enabled ? 'block' : 'hidden'}`}>
+    <div className={` fixed top-0 right-0 h-full w-50 bg-black/85 ${context.enabled ? 'block' : 'hidden'} z-20`}>
       <div className='flex items-center flex-col pt-20 gap-8'>
         <Navlink content='Home' href='/home'/>
         <Navlink content='Movies' href='/movies'/>
