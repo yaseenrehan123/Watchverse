@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { FaSearch } from "react-icons/fa";
 import { useSearchContext } from '../../contexts/SearchContext';
 import { useDebouncedSearchContext } from '../../contexts/DebouncedSearchContext';

@@ -5,3 +5,183 @@
   --font-anton: "Anton", sans-serif;
   --font-roboto: "Roboto", sans-serif;
 }
+.right-nav-search-bar {
+  width: 650px; 
+}
+.left-nav-search-bar{
+  width: 650px;
+}
+
+@media (max-width:1950px){
+  .right-nav-search-bar{
+    width: 630px;
+  }
+}
+
+@media (max-width:1900px){
+  .right-nav-search-bar{
+    width: 610px;
+  }
+}
+
+@media (max-width:1850px){
+  .right-nav-search-bar{
+    width: 580px;
+  }
+}
+
+@media (max-width:1800px){
+  .right-nav-search-bar{
+    width: 550px;
+  }
+}
+
+@media (max-width:1750px){
+  .right-nav-search-bar{
+    width: 530px;
+  }
+}
+
+@media (max-width:1700px){
+  .right-nav-search-bar{
+    width: 510px;
+  }
+}
+
+@media (max-width:1650px){
+  .right-nav-search-bar{
+    width: 480px;
+  }
+}
+
+@media (max-width:1600px){
+  .right-nav-search-bar{
+    width: 450px;
+  }
+}
+
+@media (max-width:1550px){
+  .right-nav-search-bar{
+    width: 480px;
+  }
+}
+
+@media (max-width:1500px){
+  .right-nav-search-bar{
+    width: 350px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .right-nav-search-bar {
+    width: 320px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .right-nav-search-bar {
+    width: 280px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .right-nav-search-bar {
+    width: 240px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .right-nav-search-bar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 850px) {
+  .right-nav-search-bar {
+    width: 160px;
+  }
+}
+
+@media (max-width: 720px) {
+  .left-nav-search-bar {
+    width: 620px;
+  }
+}
+
+@media (max-width: 690px) {
+  .left-nav-search-bar {
+    width: 590px;
+  }
+}
+
+@media (max-width: 660px) {
+  .left-nav-search-bar {
+    width: 560px;
+  }
+}
+
+@media (max-width: 630px) {
+  .left-nav-search-bar {
+    width: 530px;
+  }
+}
+
+@media (max-width: 600px) {
+  .left-nav-search-bar {
+    width: 500px;
+  }
+}
+
+@media (max-width: 570px) {
+  .left-nav-search-bar {
+    width: 470px;
+  }
+}
+
+@media (max-width: 540px) {
+  .left-nav-search-bar {
+    width: 440px;
+  }
+}
+
+@media (max-width: 510px) {
+  .left-nav-search-bar {
+    width: 410px;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-nav-search-bar {
+    width: 380px;
+  }
+}
+
+@media (max-width: 450px) {
+  .left-nav-search-bar {
+    width: 350px;
+  }
+}
+
+@media (max-width: 420px) {
+  .left-nav-search-bar {
+    width: 320px;
+  }
+}
+
+@media (max-width: 390px) {
+  .left-nav-search-bar {
+    width: 290px;
+  }
+}
+
+@media (max-width: 360px) {
+  .left-nav-search-bar {
+    width: 260px;
+  }
+}
+
+@media (max-width: 330px) {
+  .left-nav-search-bar {
+    width: 230px;
+  }
+}
