@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import type {TMDBFilterType } from '../../types'
 import { TMDB_FILTERS } from '../../utils/filters';
 import { useMediaFilterContext } from '../../contexts/MediaFilterContext';
+import { useMediaPaginationContext } from '../../contexts/MediaPaginationContext';
 
 const MediaFilterDropdown = () => {
   const {filter,setFilter} = useMediaFilterContext();
   const [open,setOpen] = useState<boolean>(false);
+  const {setPage} = useMediaPaginationContext();
   const handleSelect =(value:TMDBFilterType) => {
     setFilter(value);
     setOpen(false);
+    setPage(1);
   }
   return (
     <div className='w-46 min-h-12 bg-gray-950 flex items-center flex-col rounded-2xl outline-2 outline-black

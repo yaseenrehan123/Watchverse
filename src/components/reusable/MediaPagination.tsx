@@ -1,8 +1,10 @@
 import React from 'react'
 import MediaPaginationButton from './MediaPaginationButton'
 import type { MediaPaginationProps } from '../../types';
+import { useMediaPaginationContext } from '../../contexts/MediaPaginationContext';
 
-const MediaPagination = ({ totalPages, currentPage, setPage }: MediaPaginationProps) => {
+const MediaPagination = () => {
+    const {currentPage,totalPages,setPage} = useMediaPaginationContext();
     const visiblePageCount = 5;
     const startPage = Math.max(currentPage - 2, 1);
     const endPage = Math.min(startPage + visiblePageCount - 1, totalPages);

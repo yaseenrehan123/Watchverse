@@ -7,8 +7,7 @@ import useTMDBDATA from '../../hooks/useTMDBData';
 import MediaPagination from './MediaPagination';
 
 const MediaContainer = () => {
-    const [page, setPage] = useState<number>(1);
-    const { data, status }: useTMDBDataResult = useTMDBDATA(page);
+    const { data, status }: useTMDBDataResult = useTMDBDATA();
   
     if (status.state === 'Loading') {
         return <MediaLoadingText content='Loading...' />
@@ -18,17 +17,17 @@ const MediaContainer = () => {
     }
     if (status.state === 'Success') {
         return (
-            <div className='flex items-center justify-center gap-5 flex-wrap'>
+            <div className='flex items-center justify-center gap-5 flex-wrap w-full'>
                 {data?.results.map((item:TMDBItem)=>(
                     <ShowCard 
                     key={item.id}
                     imgSrc={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                    rating={item.vote_average.toFixed(1)}
+                    rating={item.vote_average ? item.vote_average.toFixed(1) : "N/A"}
                     year={item.release_date?.split('-')[0] ?? 'N/A'}
                     title={item.title}
                     />
                 ))}
-                <MediaPagination totalPages={data?.total_pages ?? 1} currentPage={page} setPage={setPage}/>
+                <MediaPagination/>
             </div>
         )
     }

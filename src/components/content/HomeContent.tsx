@@ -7,14 +7,12 @@ import MediaContainer from '../reusable/MediaContainer';
 const HomeContent = () => {
   return (
     <div className='flex items-center flex-col gap-5'>
-        <div className={`flex flex-col sm:flex-row pl-0 sm:pl-24 items-center  gap-5 w-full`}>
-                <MediaFilterDropdown/>
-                <ContentTypeSelection/>
-            </div>
-            <div className='flex items-center justify-center w-full'>
-                <MediaContainer/>
-            </div>
-           
+      <div className={`flex flex-col sm:flex-row pl-0 sm:pl-24 items-center  gap-5 w-full`}>
+        <MediaFilterDropdown />
+        <ContentTypeSelection />
+      </div>
+      <MediaContainer />
+
     </div>
   )
 }

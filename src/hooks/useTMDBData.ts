@@ -3,13 +3,15 @@ import type { Status, TMDBResponse, useTMDBDATAOptions, useTMDBDataResult } from
 import { useDebouncedSearchContext } from "../contexts/DebouncedSearchContext";
 import { useMediaTypeContext } from "../contexts/MediaTypeContext";
 import { useMediaFilterContext } from "../contexts/MediaFilterContext";
+import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
 
-export default function useTMDBDATA(page: number = 1): useTMDBDataResult {
+export default function useTMDBDATA(): useTMDBDataResult {
     const [moviesData, setMoviesData] = useState<TMDBResponse | undefined>();
     const [status, setStatus] = useState<Status | undefined>();
     const {debouncedSearchValue} = useDebouncedSearchContext();
     const {type} = useMediaTypeContext();
     const {filter} = useMediaFilterContext();
+    const {currentPage,setTotalPages} = useMediaPaginationContext();
     useEffect(() => {
         const query:string = debouncedSearchValue;
         const BASE_URL: string = query ?
@@ -37,8 +39,8 @@ export default function useTMDBDATA(page: number = 1): useTMDBDataResult {
             try {
                 setStatus({ state: 'Loading' });
                 const endpoint: string = query  
-                    ? `${BASE_URL}?query=${encodeURIComponent(query)}&page=${page}`
-                    : `${BASE_URL}?${FILTER}&page=${page}`;
+                    ? `${BASE_URL}?query=${encodeURIComponent(query)}&page=${currentPage}`
+                    : `${BASE_URL}?${FILTER}&page=${currentPage}`;
                 const response = await fetch(endpoint, OPTIONS);
                 if (!response.ok) {
                     setStatus({ state: 'Error', message: 'Something went wrong...' });
@@ -54,7 +56,7 @@ export default function useTMDBDATA(page: number = 1): useTMDBDataResult {
             }
         };
         fetchMovies();
-    }, [type, filter,debouncedSearchValue,page]);
+    }, [type, filter,debouncedSearchValue,currentPage]);
 
     if (!status) {
         return {
@@ -66,6 +68,7 @@ export default function useTMDBDATA(page: number = 1): useTMDBDataResult {
         if (moviesData === undefined || status === undefined) {
             throw new Error("RESULT NULL ON SUCCESS!");
         };
+        setTotalPages(moviesData.total_pages)
     };
     const result: useTMDBDataResult = {
         data: moviesData,

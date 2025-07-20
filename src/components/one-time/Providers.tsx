@@ -4,6 +4,7 @@ import { DebouncedSearchContextProvider } from '../../contexts/DebouncedSearchCo
 import { SidebarContextProvider } from '../../contexts/SidebarContext'
 import { MediaTypeContextProvider } from '../../contexts/MediaTypeContext'
 import { MediaFilterContextProvider } from '../../contexts/MediaFilterContext'
+import { MediaPaginationContextProvider } from '../../contexts/MediaPaginationContext'
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -13,7 +14,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
                     <SidebarContextProvider>
                         <MediaTypeContextProvider>
                             <MediaFilterContextProvider>
-                                {children}
+                                <MediaPaginationContextProvider>
+                                    {children}
+                                </MediaPaginationContextProvider>
                             </MediaFilterContextProvider>
                         </MediaTypeContextProvider>
                     </SidebarContextProvider>

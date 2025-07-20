@@ -35,6 +35,12 @@ export type MediaFilterContextType = {
   filter:TMDBFilterType,
   setFilter:(value:TMDBFilterType) => void
 }
+export type MediaPaginationContextType = {
+  totalPages:number,
+  setTotalPages:(val:number)=>void,
+  currentPage:number,
+  setPage:(val:number)=>void;
+}
 //PROPS
 export type NavlinkProps = {
   content: string,

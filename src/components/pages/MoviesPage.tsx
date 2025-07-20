@@ -4,9 +4,11 @@ import { useMediaTypeContext } from '../../contexts/MediaTypeContext';
 import { useMediaFilterContext } from '../../contexts/MediaFilterContext';
 import MoviesHeader from '../headers/MoviesHeader';
 import MoviesContent from '../content/MoviesContent';
+import { resetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad';
 
 const MoviesPage = () => {
     useClearSearchOnLoad();
+    resetPaginationOnLoad();
     const {setType} = useMediaTypeContext();
     const {setFilter} = useMediaFilterContext();
     useEffect(()=>{
