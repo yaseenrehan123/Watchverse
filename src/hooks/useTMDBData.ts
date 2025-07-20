@@ -8,12 +8,12 @@ import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
 export default function useTMDBDATA(): useTMDBDataResult {
     const [moviesData, setMoviesData] = useState<TMDBResponse | undefined>();
     const [status, setStatus] = useState<Status | undefined>();
-    const {debouncedSearchValue} = useDebouncedSearchContext();
-    const {type} = useMediaTypeContext();
-    const {filter} = useMediaFilterContext();
-    const {currentPage,setTotalPages} = useMediaPaginationContext();
+    const { debouncedSearchValue } = useDebouncedSearchContext();
+    const { type } = useMediaTypeContext();
+    const { filter } = useMediaFilterContext();
+    const { currentPage, setTotalPages } = useMediaPaginationContext();
     useEffect(() => {
-        const query:string = debouncedSearchValue;
+        const query: string = debouncedSearchValue;
         const BASE_URL: string = query ?
             type === 'MOVIE'
                 ? 'https://api.themoviedb.org/3/search/movie'
@@ -24,9 +24,10 @@ export default function useTMDBDATA(): useTMDBDataResult {
                 : 'https://api.themoviedb.org/3/discover/tv';
         const FILTER: string =
             filter === 'POPULAR' ? 'sort_by=popularity.desc'
-                : filter === 'TRENDING' ? 'sort_by=vote_average.desc'
-                    : filter === 'NEW' ? `sort_by=release_date.desc&primary_release_date.lte=${new Date().toISOString().split('T')[0]}`
-                        : 'sort_by=popularity.desc'; //DEFAULT
+            : filter === 'TRENDING' ? 'sort_by=vote_average.desc'
+            : filter === 'NEW' ? `sort_by=release_date.desc&primary_release_date.lte=${new Date().toISOString().split('T')[0]}`
+            : filter === 'TOP_IMDB' ? 'sort_by=vote_average.desc&vote_count.gte=1000'
+            : 'sort_by=popularity.desc'; //DEFAULT
         const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
         const OPTIONS = {
             method: 'GET',
@@ -38,7 +39,7 @@ export default function useTMDBDATA(): useTMDBDataResult {
         const fetchMovies = async () => {
             try {
                 setStatus({ state: 'Loading' });
-                const endpoint: string = query  
+                const endpoint: string = query
                     ? `${BASE_URL}?query=${encodeURIComponent(query)}&page=${currentPage}`
                     : `${BASE_URL}?${FILTER}&page=${currentPage}`;
                 const response = await fetch(endpoint, OPTIONS);
@@ -56,7 +57,7 @@ export default function useTMDBDATA(): useTMDBDataResult {
             }
         };
         fetchMovies();
-    }, [type, filter,debouncedSearchValue,currentPage]);
+    }, [type, filter, debouncedSearchValue, currentPage]);
 
     if (!status) {
         return {

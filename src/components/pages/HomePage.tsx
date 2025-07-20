@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react'
 import HomeHeader from '../headers/HomeHeader'
 import HomeContent from '../content/HomeContent'
 import useClearSearchOnLoad from '../../hooks/useClearSearchOnLoad'
-import { resetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad'
+import { useResetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad'
+import useSetMediaTypeOnLoad from '../../hooks/useSetMediaTypeOnLoad'
+import useSetMediaFilterOnLoad from '../../hooks/useSetMediaFilterOnLoad'
 
 const HomePage = () => {
     useClearSearchOnLoad();
-    resetPaginationOnLoad();
+    useResetPaginationOnLoad();
+    useSetMediaTypeOnLoad('MOVIE');
+    useSetMediaFilterOnLoad('POPULAR');
     return (
         <div className='flex items-center flex-col gap-5'>
             <HomeHeader />

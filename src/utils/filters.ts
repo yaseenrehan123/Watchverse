@@ -1,1 +1,1 @@
-export const TMDB_FILTERS = ['POPULAR', 'TRENDING' , 'NEW'] as const;
+export const TMDB_FILTERS = ['POPULAR', 'TRENDING' , 'NEW', 'TOP_IMDB'] as const;

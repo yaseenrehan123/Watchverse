@@ -5,6 +5,8 @@ import LandingPage from './components/pages/LandingPage'
 import Layout from './components/Layout'
 import NotFoundPage from './components/pages/NotFoundPage'
 import MoviesPage from './components/pages/MoviesPage'
+import TvShowsPage from './components/pages/TvShowsPage'
+import TopImdbPage from './components/pages/TopImdbPage'
 
 const router = createBrowserRouter([
   {
@@ -13,7 +15,9 @@ const router = createBrowserRouter([
     children:[
       {index:true, element:<LandingPage/>},
       {path:'home',element:<HomePage/>},
-      {path:'movies',element:<MoviesPage/>}
+      {path:'movies',element:<MoviesPage/>},
+      {path:'tv-shows',element:<TvShowsPage/>},
+      {path:'top-imdb',element:<TopImdbPage/>}
     ],
     errorElement:<NotFoundPage/>
   }

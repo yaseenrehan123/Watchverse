@@ -4,17 +4,15 @@ import { useMediaTypeContext } from '../../contexts/MediaTypeContext';
 import { useMediaFilterContext } from '../../contexts/MediaFilterContext';
 import MoviesHeader from '../headers/MoviesHeader';
 import MoviesContent from '../content/MoviesContent';
-import { resetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad';
+import { useResetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad';
+import useSetMediaTypeOnLoad from '../../hooks/useSetMediaTypeOnLoad';
+import useSetMediaFilterOnLoad from '../../hooks/useSetMediaFilterOnLoad';
 
 const MoviesPage = () => {
     useClearSearchOnLoad();
-    resetPaginationOnLoad();
-    const {setType} = useMediaTypeContext();
-    const {setFilter} = useMediaFilterContext();
-    useEffect(()=>{
-        setType('MOVIE');
-        setFilter('POPULAR')
-    },[]);
+    useResetPaginationOnLoad();
+    useSetMediaTypeOnLoad('MOVIE');
+    useSetMediaFilterOnLoad('POPULAR');
   return (
     <div className='flex items-center flex-col gap-5'>
       <MoviesHeader/>
