@@ -50,7 +50,8 @@ export type ShowCardProps = {
   imgSrc: string,
   rating: string,
   year: string,
-  title: string
+  title: string,
+  link:string
 };
 export type RedirectingSearchbarProps = {
   path: string
@@ -64,6 +65,18 @@ export type MediaPaginationButtonProps = {
   content:string,
   selected:boolean,
   onClick:()=>void
+}
+export type OverviewContainerProps = {
+  backdropImgSrc:string,
+  posterImgSrc:string,
+  title:string,
+  overview:string,
+  releaseDate:string,
+  duration:string,
+  genre:string[],
+  casts:string[],
+  country:string,
+  production:string[]
 }
 //HOOK TYPES
 export type TMDBResponse = {
@@ -89,6 +102,57 @@ export type TMDBItem = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+};
+export type CastItem = {
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  gender: number;
+  id: number;
+  name: string;
+  order: number;
+  profile_path: string | null;
+};
+export type TMDBMovieDetails = {
+  id: number;
+  title: string;
+  overview: string;
+  genres: { id: number; name: string }[];
+  runtime: number;
+  release_date: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  production_companies: { name: string; logo_path: string | null }[];
+  production_countries: { name: string; iso_3166_1: string }[];
+  spoken_languages: { name: string; iso_639_1: string }[];
+  budget: number;
+  revenue: number;
+  status: string;
+  tagline: string;
+  homepage: string;
+  imdb_id: string;
+};
+export type TMDBTVDetails = {
+  id: number;
+  name: string;
+  original_name: string;
+  overview: string;
+  genres: { id: number; name: string }[];
+  first_air_date: string;
+  episode_run_time: number[];
+  poster_path: string | null;
+  backdrop_path: string | null;
+  production_companies: { name: string; logo_path: string | null }[];
+  production_countries: { name: string; iso_3166_1: string }[];
+  spoken_languages: { name: string; iso_639_1: string }[];
+  status: string;
+  tagline: string;
+  homepage: string;
+  in_production: boolean;
+  number_of_episodes: number;
+  number_of_seasons: number;
+  last_air_date: string;
+  created_by: { id: number; name: string }[];
 };
 //RETURN TYPES
 export type useTMDBDataResult = {

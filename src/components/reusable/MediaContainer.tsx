@@ -5,10 +5,11 @@ import MediaErrorText from '../utilComponents/MediaErrorText';
 import ShowCard from './ShowCard';
 import useTMDBDATA from '../../hooks/useTMDBData';
 import MediaPagination from './MediaPagination';
+import { useMediaTypeContext } from '../../contexts/MediaTypeContext';
 
 const MediaContainer = () => {
     const { data, status }: useTMDBDataResult = useTMDBDATA();
-  
+    const {type} = useMediaTypeContext();
     if (status.state === 'Loading') {
         return <MediaLoadingText content='Loading...' />
     }
@@ -16,15 +17,17 @@ const MediaContainer = () => {
         return <MediaErrorText content={`${status.message}`} />
     }
     if (status.state === 'Success') {
+        //console.log(data);
         return (
-            <div className='flex items-center justify-center gap-5 flex-wrap w-full'>
+            <div className='flex items-center justify-center gap-5 flex-wrap w-full'> 
                 {data?.results.map((item:TMDBItem)=>(
                     <ShowCard 
                     key={item.id}
                     imgSrc={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                    rating={item.vote_average ? item.vote_average.toFixed(1) : "N/A"}
+                    rating={typeof item.vote_average === 'number' ? item.vote_average.toFixed(1) : 'N/A'}
                     year={item.release_date?.split('-')[0] ?? 'N/A'}
                     title={item.title}
+                    link={`/overview/${type.toLowerCase()}/${item.id}`}
                     />
                 ))}
                 <MediaPagination/>

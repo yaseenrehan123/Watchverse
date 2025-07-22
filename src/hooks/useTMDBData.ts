@@ -24,10 +24,10 @@ export default function useTMDBDATA(): useTMDBDataResult {
                 : 'https://api.themoviedb.org/3/discover/tv';
         const FILTER: string =
             filter === 'POPULAR' ? 'sort_by=popularity.desc'
-            : filter === 'TRENDING' ? 'sort_by=vote_average.desc'
-            : filter === 'NEW' ? `sort_by=release_date.desc&primary_release_date.lte=${new Date().toISOString().split('T')[0]}`
-            : filter === 'TOP_IMDB' ? 'sort_by=vote_average.desc&vote_count.gte=1000'
-            : 'sort_by=popularity.desc'; //DEFAULT
+                : filter === 'TRENDING' ? 'sort_by=vote_average.desc'
+                    : filter === 'NEW' ? `sort_by=release_date.desc&primary_release_date.lte=${new Date().toISOString().split('T')[0]}`
+                        : filter === 'TOP_IMDB' ? 'sort_by=vote_average.desc&vote_count.gte=1000'
+                            : 'sort_by=popularity.desc'; //DEFAULT
         const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
         const OPTIONS = {
             method: 'GET',
@@ -36,7 +36,7 @@ export default function useTMDBDATA(): useTMDBDataResult {
                 Authorization: `Bearer ${API_KEY}`
             }
         };
-        const fetchMovies = async () => {
+        const fetchMedia = async () => {
             try {
                 setStatus({ state: 'Loading' });
                 const endpoint: string = query
@@ -56,8 +56,14 @@ export default function useTMDBDATA(): useTMDBDataResult {
                 throw new Error("FAILED TO FETCH TMDB DATA! " + error);
             }
         };
-        fetchMovies();
+        fetchMedia();
     }, [type, filter, debouncedSearchValue, currentPage]);
+
+    useEffect(() => {
+        if (status?.state === 'Success' && moviesData?.total_pages) {
+            setTotalPages(moviesData.total_pages);
+        }
+    }, [status, moviesData]);
 
     if (!status) {
         return {
@@ -69,7 +75,6 @@ export default function useTMDBDATA(): useTMDBDataResult {
         if (moviesData === undefined || status === undefined) {
             throw new Error("RESULT NULL ON SUCCESS!");
         };
-        setTotalPages(moviesData.total_pages)
     };
     const result: useTMDBDataResult = {
         data: moviesData,

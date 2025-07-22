@@ -7,6 +7,7 @@ import NotFoundPage from './components/pages/NotFoundPage'
 import MoviesPage from './components/pages/MoviesPage'
 import TvShowsPage from './components/pages/TvShowsPage'
 import TopImdbPage from './components/pages/TopImdbPage'
+import OverviewPage from './components/pages/OverviewPage'
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
       {path:'home',element:<HomePage/>},
       {path:'movies',element:<MoviesPage/>},
       {path:'tv-shows',element:<TvShowsPage/>},
-      {path:'top-imdb',element:<TopImdbPage/>}
+      {path:'top-imdb',element:<TopImdbPage/>},
+      {path:'overview/:type/:id',element:<OverviewPage/>}
     ],
     errorElement:<NotFoundPage/>
   }
