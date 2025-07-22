@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import type { Status, TMDBFetchType } from "../types";
+import { TMDBTypeToUrl } from "../utils/TMDBTypeToUrl";
 
-export default function useFetchMediaCredits(type: string | undefined, id: string | undefined): { data: any | undefined, status: Status } {
+export default function useFetchMediaCredits(type: TMDBFetchType, id: string | undefined): { data: any | undefined, status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
     const [data, setData] = useState<any | undefined>(undefined);
 
     useEffect(() => {
         const fetchCredits = async () => {
+            const extensionUrl:string = TMDBTypeToUrl(type);
             const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
             const OPTIONS = {
                 method: 'GET',
@@ -17,7 +19,7 @@ export default function useFetchMediaCredits(type: string | undefined, id: strin
             };
             try {
                 setStatus({ state: 'Loading' });
-                const response = await fetch(`https://api.themoviedb.org/3/${type}/${id}/credits?api_key=...`, OPTIONS)
+                const response = await fetch(`https://api.themoviedb.org/3/${extensionUrl}/${id}/credits?api_key=...`, OPTIONS)
                 if (!response.ok) {
                     setStatus({ state: 'Error', message: 'Something went wrong...' })
                 }

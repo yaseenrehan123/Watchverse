@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import type { Status,  TMDBMovieDetails, TMDBTVDetails } from "../types";
+import type { Status,  TMDBFetchType,  TMDBMovieDetails, TMDBTVDetails } from "../types";
+import { TMDBTypeToUrl } from "../utils/TMDBTypeToUrl";
 
-export default function (type: string | undefined, id: string | undefined): { data: TMDBMovieDetails | TMDBTVDetails | undefined, status: Status } {
+export default function (type: TMDBFetchType, id: string | undefined): { data: TMDBMovieDetails | TMDBTVDetails | undefined, status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
     const [data, setData] = useState<TMDBMovieDetails | TMDBTVDetails | undefined>(undefined);
 
     useEffect(() => {
         if (!type || !id) return;
         const fetchMediaItem = async () => {
+            const extensionUrl:string = TMDBTypeToUrl(type);
             const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
             const OPTIONS = {
                 method: 'GET',
@@ -18,7 +20,7 @@ export default function (type: string | undefined, id: string | undefined): { da
             };
             try {
                 setStatus({ state: 'Loading' });
-                const response = await fetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=...`, OPTIONS)
+                const response = await fetch(`https://api.themoviedb.org/3/${extensionUrl}/${id}?api_key=...`, OPTIONS)
                 if (!response.ok) {
                     setStatus({ state: 'Error', message: 'Something went wrong...' });
                     throw new Error("FAILED TO LOAD OVERVIEW! RESPONSE NOT OK!")

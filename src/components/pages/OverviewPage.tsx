@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import type { Status, OverviewContainerProps, TMDBMovieDetails, TMDBTVDetails } from '../../types';
+import type { Status, OverviewContainerProps, TMDBMovieDetails, TMDBTVDetails, TMDBFetchType } from '../../types';
 import useFetchMediaItem from '../../hooks/useFetchMediaDetails';
 import MediaLoadingText from '../utilComponents/MediaLoadingText';
 import MediaErrorText from '../utilComponents/MediaErrorText';
 import OverviewContainer from '../one-time/OverviewContainer';
 import useFetchMediaCredits from '../../hooks/useFetchMediaCredits';
+import { parseTMDBType } from '../../utils/parseTMDBType';
+import mergedStatusResult from '../../utils/mergedStatusResult';
+import getOverviewContainerProps from '../../utils/getOverviewContainerProps';
+import { OverviewDataContextProvider } from '../../contexts/OverviewDataContext';
 
 const OverviewPage = () => {
   const { type, id } = useParams();
-  const { data: mediaData, status: mediaStatus } = useFetchMediaItem(type, id);
-  const { data: creditsData, status: creditsStatus } = useFetchMediaCredits(type, id);
-  console.log("MEDIA STATUS:", mediaStatus, "CREDITS STATUS: ", creditsStatus)
+  const parsedType = parseTMDBType(type);
+  if (parsedType === null) {
+    return (
+      <div className='pt-13 flex items-center flex-col'>
+        <MediaErrorText content={'Unrecognized Url!'} />
+      </div>
+    );
+  }
+  const { data: mediaData, status: mediaStatus } = useFetchMediaItem(parsedType, id);
+  const { data: creditsData, status: creditsStatus } = useFetchMediaCredits(parsedType, id);
+  const status = mergedStatusResult([mediaStatus, creditsStatus]);
   // Show loading if either is loading
-  if (mediaStatus.state === 'Loading' || creditsStatus.state === 'Loading') {
+  if (status.state === 'Loading') {
     return (
       <div className='pt-13 flex items-center flex-col'>
         <MediaLoadingText content='Loading...' />
@@ -22,77 +34,36 @@ const OverviewPage = () => {
   }
 
   // Show error if either fails
-  if (mediaStatus.state === 'Error' || creditsStatus.state === 'Error') {
+  if (status.state === 'Error') {
     return (
       <div className='pt-13 flex items-center flex-col'>
-        <MediaErrorText content={
-          mediaStatus.state === 'Error' ? mediaStatus.message
-            : creditsStatus.state === 'Error' ? creditsStatus?.message
-              : 'Error!'
-        } />
+        <MediaErrorText content={status.message} />
       </div>
     );
   }
 
   // If both succeed
-  if (mediaStatus.state === 'Success' && creditsStatus.state === 'Success' && mediaData && creditsData) {
+  if (status.state === 'Success') {
+    if (!(mediaData || creditsData)) {
+      return (
+        <div className='pt-13 flex items-center flex-col'>
+          <MediaErrorText content={'Unable To Load Data! Unknown Error'} />
+        </div>
+      );
+    }
     console.log("DETAILS:", mediaData);
-    const castNames = creditsData?.cast?.slice(0, 5).map((actor: any) => actor.name) || [];
-    let props: OverviewContainerProps;
-    if (type === 'movie') {
-      const movieData = mediaData as TMDBMovieDetails;
-      props = {
-        backdropImgSrc: `https://image.tmdb.org/t/p/original${movieData.backdrop_path}`,
-        posterImgSrc: `https://image.tmdb.org/t/p/w500${movieData.poster_path}`,
-        title: movieData.title,
-        overview: movieData.overview,
-        releaseDate: movieData.release_date,
-        duration: `${movieData.runtime || "?"}min`,
-        genre: movieData.genres?.map((g: any) => g.name) || [],
-        casts: castNames,
-        country: movieData.production_countries?.[0]?.name || "Unknown",
-        production: movieData.production_companies?.map((p: any) => p.name) || []
-      } as OverviewContainerProps;
-    }
-    else if (type === 'tv') {
-      const tvShowData = mediaData as TMDBTVDetails;
-      props = {
-        backdropImgSrc: `https://image.tmdb.org/t/p/original${tvShowData.backdrop_path}`,
-        posterImgSrc: `https://image.tmdb.org/t/p/w500${tvShowData.poster_path}`,
-        title: tvShowData.name,
-        overview: tvShowData.overview,
-        releaseDate: tvShowData.first_air_date,
-        duration: `${tvShowData.episode_run_time || "?"}min`,
-        genre: tvShowData.genres?.map((g: any) => g.name) || [],
-        casts: castNames,
-        country: tvShowData.production_countries?.[0]?.name || "Unknown",
-        production: tvShowData.production_companies?.map((p: any) => p.name) || []
-      } as OverviewContainerProps;
-    }
-    else {
-      props = {
-        backdropImgSrc: '',
-        posterImgSrc: '',
-        title: 'Unknown Media',
-        overview: '',
-        releaseDate: '',
-        duration: '',
-        genre: [],
-        casts: [],
-        country: '',
-        production: []
-      };
-    }
-
+    const castNames:string[] = creditsData?.cast?.slice(0, 5).map((actor: any) => actor.name) || [];
+    let props: OverviewContainerProps = getOverviewContainerProps(parsedType!,mediaData!,castNames!);
 
     return (
       <div className='pt-9 flex items-center flex-col gap-5 relative'>
-        <OverviewContainer {...props} />
+        <OverviewDataContextProvider value={props}>
+           <OverviewContainer/>
+        </OverviewDataContextProvider>
+       
       </div>
     );
   }
-
-  return null; // fallback
 };
 
 
