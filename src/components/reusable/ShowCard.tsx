@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const ShowCard = ({ imgSrc, rating, year, title: name, link }: ShowCardProps) => {
     const [imgError, setImageError] = useState<boolean>(false);
     return (
-        <div className='w-60 min-h-96 bg-gray-800 flex items-center flex-col gap-3'>
+        <div className='w-60 h-[25.5rem] bg-gray-800 flex items-center flex-col gap-3 aspect-[3/4] show-card'>
             <div className='w-full h-72 hover:cursor-pointer'>
                 <Link to={link}>
                     {!imgError && imgSrc ? (<img src={imgSrc} alt="poster-img" className='w-full h-full' onError={() => setImageError(true)} />)
@@ -27,7 +27,7 @@ const ShowCard = ({ imgSrc, rating, year, title: name, link }: ShowCardProps) =>
                     </div>
                 </div>
                 <div className='font-roboto font-medium w-full text-left'>
-                    <Link to={link}><span className='hover:text-cyan-500 hover:cursor-pointer'>{name}</span></Link>
+                    <Link to={link}><span className='hover:text-cyan-500 hover:cursor-pointer line-clamp-1 overflow-x-hidden w-full'>{name}</span></Link>
                 </div>
             </div>
             <div className='w-3/4 h-8 bg-gray-700 hover:bg-gray-600'>

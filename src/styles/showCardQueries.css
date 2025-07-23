@@ -1,0 +1,37 @@
+@media (max-width:1400px) {
+    .show-card {
+        width: 240px;
+    }
+}
+@media (max-width:1300px) {
+    .show-card {
+        width: 220px;
+    }
+}
+@media (max-width:1200px) {
+    .show-card {
+        width: 200px;
+    }
+}
+@media (max-width:1100px) {
+    .show-card {
+        width: 200px;
+    }
+}
+@media (max-width:1000px) {
+    .show-card {
+        width: 180px;
+    }
+}
+@media (max-width:900px) {
+    .show-card {
+        width: 160px;
+    }
+}/*
+@media (max-width:800px) {
+    .show-card {
+        width: 140px;
+    }
+}
+
+*/
