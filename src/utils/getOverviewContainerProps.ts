@@ -1,8 +1,8 @@
-import type { OverviewContainerProps, TMDBFetchType, TMDBMovieDetails, TMDBTVDetails } from "../types";
+import type { OverviewContainerProps, MediaType, TMDBMovieDetails, TMDBTVDetails } from "../types";
 
 export default function getOverviewContainerProps
     (
-        type: TMDBFetchType,
+        type: MediaType,
         data: TMDBMovieDetails | TMDBTVDetails,
         castNames: string[]
     ): OverviewContainerProps {

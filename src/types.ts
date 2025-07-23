@@ -28,12 +28,12 @@ export type DebouncedSearchContextType = {
   setDebouncedSearchValue:(val:string)=>void
 }
 export type MediaTypeContextType = {
-  type:TMDBFetchType,
-  setType:(value:TMDBFetchType) => void
+  type:MediaType,
+  setType:(value:MediaType) => void
 }
 export type MediaFilterContextType = {
-  filter:TMDBFilterType,
-  setFilter:(value:TMDBFilterType) => void
+  filter:MediaFilter,
+  setFilter:(value:MediaFilter) => void
 }
 export type MediaPaginationContextType = {
   totalPages:number,
@@ -81,13 +81,12 @@ export type OverviewContainerProps = {
 //HOOK TYPES
 export type TMDBResponse = {
   page: number;
-  results: TMDBItem[];
+  results: TMDBData[];
   total_pages: number;
   total_results: number;
 };
-export type Status = StatusSuccess | StatusLoading | StatusError;
 //GENERAL
-export type TMDBItem = {
+export type TMDBData = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -154,15 +153,16 @@ export type TMDBTVDetails = {
   last_air_date: string;
   created_by: { id: number; name: string }[];
 };
+export type MediaType = 'MOVIE' | 'TV';
+export type MediaFilter = typeof TMDB_FILTERS[number];
+export type Status = StatusSuccess | StatusLoading | StatusError;
 //RETURN TYPES
-export type useTMDBDataResult = {
+export type useFetchMediaDataResult = {
   data: TMDBResponse | undefined,
   status: Status
 };
 //FUNCTION OPTIONS
-export type useTMDBDATAOptions = {
-  type: TMDBFetchType,
-  filter?: TMDBFilterType
+export type useFetchMediaDataOptions = {
+  type: MediaType,
+  filter?: MediaFilter
 }
-export type TMDBFetchType = 'MOVIE' | 'TV';
-export type TMDBFilterType = typeof TMDB_FILTERS[number];

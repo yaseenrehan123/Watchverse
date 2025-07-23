@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import HomePage from './components/pages/HomePage'
+import HomePage from './features/home/HomePage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import LandingPage from './components/pages/LandingPage'
-import Layout from './components/Layout'
-import NotFoundPage from './components/pages/NotFoundPage'
-import MoviesPage from './components/pages/MoviesPage'
-import TvShowsPage from './components/pages/TvShowsPage'
-import TopImdbPage from './components/pages/TopImdbPage'
-import OverviewPage from './components/pages/OverviewPage'
+import LandingPage from './features/landing/LandingPage'
+import Layout from './app/Layout'
+import NotFoundPage from './app/NotFoundPage'
+import MoviesPage from './features/movies/MoviesPage'
+import TvShowsPage from './features/tvshows/TvShowsPage'
+import TopImdbPage from './features/topImdb/TopImdbPage'
+import OverviewPage from './features/overview/OverviewPage'
 
 const router = createBrowserRouter([
   {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import HomeHeader from '../headers/HomeHeader'
-import HomeContent from '../content/HomeContent'
+import HomeHeader from './HomeHeader'
+import HomeContent from './HomeContent'
 import useClearSearchOnLoad from '../../hooks/useClearSearchOnLoad'
 import { useResetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad'
 import useSetMediaTypeOnLoad from '../../hooks/useSetMediaTypeOnLoad'

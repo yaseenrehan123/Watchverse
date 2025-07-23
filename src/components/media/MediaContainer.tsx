@@ -1,26 +1,26 @@
 import React, { useState } from 'react'
-import type {  TMDBItem, useTMDBDataResult } from '../../types'
-import MediaLoadingText from '../utilComponents/MediaLoadingText';
-import MediaErrorText from '../utilComponents/MediaErrorText';
+import type {  TMDBData, useFetchMediaDataResult } from '../../types'
+import LoadingText from '../utilComponents/LoadingText';
+import ErrorText from '../utilComponents/ErrorText';
 import ShowCard from './ShowCard';
-import useTMDBDATA from '../../hooks/useTMDBData';
+import useFetchMediaData from '../../hooks/useFetchMediaData';
 import MediaPagination from './MediaPagination';
 import { useMediaTypeContext } from '../../contexts/MediaTypeContext';
 
 const MediaContainer = () => {
-    const { data, status }: useTMDBDataResult = useTMDBDATA();
+    const { data, status }: useFetchMediaDataResult = useFetchMediaData();
     const {type} = useMediaTypeContext();
     if (status.state === 'Loading') {
-        return <MediaLoadingText content='Loading...' />
+        return <LoadingText content='Loading...' />
     }
     if (status.state === 'Error') {
-        return <MediaErrorText content={`${status.message}`} />
+        return <ErrorText content={`${status.message}`} />
     }
     if (status.state === 'Success') {
         //console.log(data);
         return (
             <div className='flex items-center justify-center gap-5 flex-wrap w-full'> 
-                {data?.results.map((item:TMDBItem)=>(
+                {data?.results.map((item:TMDBData)=>(
                     <ShowCard 
                     key={item.id}
                     imgSrc={`https://image.tmdb.org/t/p/w500${item.poster_path}`}

@@ -1,5 +1,5 @@
 import React from 'react'
-import Searchbar from '../reusable/Searchbar'
+import Searchbar from '../../components/Searchbar/Searchbar'
 
 const HomeHeader = () => {
   return (

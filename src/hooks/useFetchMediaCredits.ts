@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Status, TMDBFetchType } from "../types";
+import type { Status, MediaType } from "../types";
 import { TMDBTypeToUrl } from "../utils/TMDBTypeToUrl";
 
-export default function useFetchMediaCredits(type: TMDBFetchType, id: string | undefined): { data: any | undefined, status: Status } {
+export default function useFetchMediaCredits(type: MediaType, id: string | undefined): { data: any | undefined, status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
     const [data, setData] = useState<any | undefined>(undefined);
 

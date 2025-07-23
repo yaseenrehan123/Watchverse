@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import type { OverviewContainerProps } from '../../types';
 import { useOverviewDataContext } from '../../contexts/OverviewDataContext';
-import BackdropImage from '../overview/BackdropImage';
-import BackdropGradient from '../overview/BackdropGradient';
-import Poster from '../overview/Poster';
-import OverviewDetails from '../overview/OverviewDetails';
-import Title from '../overview/Title';
-import Metadata from '../overview/Metadata';
+import BackdropImage from './BackdropImage';
+import BackdropGradient from './BackdropGradient';
+import Poster from './Poster';
+import OverviewDetails from './OverviewDetails';
+import Title from './Title';
+import Metadata from './Metadata';
 
 const OverviewContainer = () => {
     return (

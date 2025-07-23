@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Status,  TMDBFetchType,  TMDBMovieDetails, TMDBTVDetails } from "../types";
+import type { Status,  MediaType,  TMDBMovieDetails, TMDBTVDetails } from "../types";
 import { TMDBTypeToUrl } from "../utils/TMDBTypeToUrl";
 
-export default function (type: TMDBFetchType, id: string | undefined): { data: TMDBMovieDetails | TMDBTVDetails | undefined, status: Status } {
+export default function (type: MediaType, id: string | undefined): { data: TMDBMovieDetails | TMDBTVDetails | undefined, status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
     const [data, setData] = useState<TMDBMovieDetails | TMDBTVDetails | undefined>(undefined);
 

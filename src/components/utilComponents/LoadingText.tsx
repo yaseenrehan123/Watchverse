@@ -1,9 +1,9 @@
 import React from 'react'
 
-const MediaLoadingText = ({content}:{content:string}) => {
+const LoadingText = ({content}:{content:string}) => {
   return (
     <div className='text-2xl text-yellow-500'>{content}</div>
   )
 }
 
-export default MediaLoadingText
+export default LoadingText

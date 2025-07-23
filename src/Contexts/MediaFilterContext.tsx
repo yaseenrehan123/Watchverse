@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-import type { TMDBFilterType, MediaFilterContextType } from "../types";
+import type { MediaFilter, MediaFilterContextType } from "../types";
 
 const MediaFilterContext = createContext<MediaFilterContextType | undefined>(undefined);
 
 export function MediaFilterContextProvider({children}:{children:React.ReactNode}){
-    const [filter,setFilter] = useState<TMDBFilterType>('POPULAR');
+    const [filter,setFilter] = useState<MediaFilter>('POPULAR');
 
     return (
         <MediaFilterContext.Provider value={{filter:filter,setFilter:setFilter}}>

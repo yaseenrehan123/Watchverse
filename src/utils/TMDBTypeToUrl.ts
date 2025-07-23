@@ -1,5 +1,5 @@
-import type { TMDBFetchType } from "../types";
+import type { MediaType } from "../types";
 
-export function TMDBTypeToUrl(type: TMDBFetchType): string {
+export function TMDBTypeToUrl(type: MediaType): string {
   return type.toLowerCase(); // 'MOVIE' => 'movie', etc.
 }

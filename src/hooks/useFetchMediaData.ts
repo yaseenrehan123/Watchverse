@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import type { Status, TMDBResponse, useTMDBDATAOptions, useTMDBDataResult } from "../types";
+import type { Status, TMDBResponse, useFetchMediaDataOptions, useFetchMediaDataResult } from "../types";
 import { useDebouncedSearchContext } from "../contexts/DebouncedSearchContext";
 import { useMediaTypeContext } from "../contexts/MediaTypeContext";
 import { useMediaFilterContext } from "../contexts/MediaFilterContext";
 import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
 
-export default function useTMDBDATA(): useTMDBDataResult {
+export default function useFetchMediaData(): useFetchMediaDataResult {
     const [moviesData, setMoviesData] = useState<TMDBResponse | undefined>();
     const [status, setStatus] = useState<Status | undefined>();
     const { debouncedSearchValue } = useDebouncedSearchContext();
@@ -76,7 +76,7 @@ export default function useTMDBDATA(): useTMDBDataResult {
             throw new Error("RESULT NULL ON SUCCESS!");
         };
     };
-    const result: useTMDBDataResult = {
+    const result: useFetchMediaDataResult = {
         data: moviesData,
         status: status!
     };

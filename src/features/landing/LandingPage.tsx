@@ -1,9 +1,6 @@
 import React from 'react'
-import Searchbar from '../reusable/Searchbar'
 import FAQ from '../faq/FAQ'
-import ViewFullSiteBtn from '../buttons/ViewFullSiteBtn'
-import RedirectingSearchbar from '../reusable/RedirectingSearchbar'
-import LandingPageHeader from '../headers/LandingPageHeader'
+import LandingPageHeader from './LandingPageHeader'
 
 const LandingPage = () => {
   return (

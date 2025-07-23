@@ -1,22 +1,22 @@
 import React from 'react'
+import TopImdbHeader from './TopImdbHeader'
+import TopImdbContent from './TopImdbContent';
 import useClearSearchOnLoad from '../../hooks/useClearSearchOnLoad';
 import { useResetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad';
-import useSetMediaFilterOnLoad from '../../hooks/useSetMediaFilterOnLoad';
 import useSetMediaTypeOnLoad from '../../hooks/useSetMediaTypeOnLoad';
-import TvShowsHeader from '../headers/TvShowsHeader';
-import TvShowContent from '../content/TvShowContent';
+import useSetMediaFilterOnLoad from '../../hooks/useSetMediaFilterOnLoad';
 
-const TvShowsPage = () => {
+const TopImdbPage = () => {
     useClearSearchOnLoad();
     useResetPaginationOnLoad();
-    useSetMediaTypeOnLoad('TV');
-    useSetMediaFilterOnLoad('POPULAR');
+    useSetMediaTypeOnLoad('MOVIE');
+    useSetMediaFilterOnLoad('TOP_IMDB');
     return (
         <div className='flex items-center flex-col gap-5'>
-            <TvShowsHeader/>
-            <TvShowContent/>
+            <TopImdbHeader />
+            <TopImdbContent/>
         </div>
     )
 }
 
-export default TvShowsPage
+export default TopImdbPage

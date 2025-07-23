@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from './navbar/Navbar'
+import Navbar from '../components/navbar/Navbar'
 import { Outlet } from 'react-router-dom'
-import Providers from './one-time/Providers'
+import Providers from './GlobalProviders'
 
 const Layout = () => {
   return (

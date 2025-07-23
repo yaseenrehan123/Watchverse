@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import type { Status, OverviewContainerProps, TMDBMovieDetails, TMDBTVDetails, TMDBFetchType } from '../../types';
+import type { Status, OverviewContainerProps, TMDBMovieDetails, TMDBTVDetails, MediaType } from '../../types';
 import useFetchMediaItem from '../../hooks/useFetchMediaDetails';
-import MediaLoadingText from '../utilComponents/MediaLoadingText';
-import MediaErrorText from '../utilComponents/MediaErrorText';
-import OverviewContainer from '../one-time/OverviewContainer';
+import LoadingText from '../../components/utilComponents/LoadingText';
+import ErrorText from '../../components/utilComponents/ErrorText';
+import OverviewContainer from './OverviewContainer';
 import useFetchMediaCredits from '../../hooks/useFetchMediaCredits';
 import { parseTMDBType } from '../../utils/parseTMDBType';
 import mergedStatusResult from '../../utils/mergedStatusResult';
@@ -17,7 +17,7 @@ const OverviewPage = () => {
   if (parsedType === null) {
     return (
       <div className='pt-13 flex items-center flex-col'>
-        <MediaErrorText content={'Unrecognized Url!'} />
+        <ErrorText content={'Unrecognized Url!'} />
       </div>
     );
   }
@@ -28,7 +28,7 @@ const OverviewPage = () => {
   if (status.state === 'Loading') {
     return (
       <div className='pt-13 flex items-center flex-col'>
-        <MediaLoadingText content='Loading...' />
+        <LoadingText content='Loading...' />
       </div>
     );
   }
@@ -37,7 +37,7 @@ const OverviewPage = () => {
   if (status.state === 'Error') {
     return (
       <div className='pt-13 flex items-center flex-col'>
-        <MediaErrorText content={status.message} />
+        <ErrorText content={status.message} />
       </div>
     );
   }
@@ -47,7 +47,7 @@ const OverviewPage = () => {
     if (!(mediaData || creditsData)) {
       return (
         <div className='pt-13 flex items-center flex-col'>
-          <MediaErrorText content={'Unable To Load Data! Unknown Error'} />
+          <ErrorText content={'Unable To Load Data! Unknown Error'} />
         </div>
       );
     }

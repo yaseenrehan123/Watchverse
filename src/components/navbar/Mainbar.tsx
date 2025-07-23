@@ -4,7 +4,7 @@ import BrandLink from './BrandLink'
 import HideFlexOnMd from '../utilComponents/HideFlexOnMd'
 import ShowFlexOnMd from '../utilComponents/ShowFlexOnMd'
 import NavMenuIcon from './NavMenuIcon'
-import NavSearchbar from './NavSearchbar'
+import NavSearchbar from '../Searchbar/NavSearchbar'
 
 const Mainbar = () => {
   return (

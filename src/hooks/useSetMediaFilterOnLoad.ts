@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useMediaFilterContext } from "../contexts/MediaFilterContext";
-import type { TMDBFilterType } from "../types";
+import type { MediaFilter } from "../types";
 
-export default function useSetMediaFilterOnLoad(filter:TMDBFilterType){
+export default function useSetMediaFilterOnLoad(filter:MediaFilter){
     const {setFilter} = useMediaFilterContext();
     useEffect(()=>{
         setFilter(filter)

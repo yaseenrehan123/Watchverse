@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type {TMDBFilterType } from '../../types'
+import type {MediaFilter } from '../../types'
 import { TMDB_FILTERS } from '../../utils/filters';
 import { useMediaFilterContext } from '../../contexts/MediaFilterContext';
 import { useMediaPaginationContext } from '../../contexts/MediaPaginationContext';
@@ -8,7 +8,7 @@ const MediaFilterDropdown = () => {
   const {filter,setFilter} = useMediaFilterContext();
   const [open,setOpen] = useState<boolean>(false);
   const {setPage} = useMediaPaginationContext();
-  const handleSelect =(value:TMDBFilterType) => {
+  const handleSelect =(value:MediaFilter) => {
     setFilter(value);
     setOpen(false);
     setPage(1);

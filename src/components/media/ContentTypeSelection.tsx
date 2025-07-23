@@ -3,11 +3,11 @@ import { TbPlayerPlayFilled } from "react-icons/tb";
 import { FaList } from "react-icons/fa6";
 import { useMediaTypeContext } from '../../contexts/MediaTypeContext';
 import { useMediaPaginationContext } from '../../contexts/MediaPaginationContext';
-import type { TMDBFetchType } from '../../types';
+import type { MediaType } from '../../types';
 const ContentTypeSelection = () => {
     const {type,setType} = useMediaTypeContext();
     const {setPage} = useMediaPaginationContext();
-    const onClick =(type:TMDBFetchType)=>{
+    const onClick =(type:MediaType)=>{
       setType(type)
       setPage(1);
     }

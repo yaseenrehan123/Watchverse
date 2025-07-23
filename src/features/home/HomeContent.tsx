@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import type { TMDBFetchType, TMDBFilterType } from '../../types';
-import MediaFilterDropdown from '../reusable/MediaFilterDropdown';
-import ContentTypeSelection from '../reusable/ContentTypeSelection';
-import MediaContainer from '../reusable/MediaContainer';
+import type { MediaType, MediaFilter } from '../../types';
+import MediaFilterDropdown from '../../components/media/MediaFilterDropdown';
+import ContentTypeSelection from '../../components/media/ContentTypeSelection';
+import MediaContainer from '../../components/media/MediaContainer';
 
 const HomeContent = () => {
   return (
