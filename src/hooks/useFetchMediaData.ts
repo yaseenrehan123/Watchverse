@@ -82,7 +82,7 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
             }
         };
         fetchMedia();
-    }, [type, filter, currentPage]);
+    }, [type, filter, currentPage,query]);
 
     useEffect(() => {
         if (status?.state === 'Success' && response?.total_pages) {
