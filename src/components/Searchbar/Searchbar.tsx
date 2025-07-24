@@ -9,6 +9,7 @@ const Searchbar = () => {
     console.log("HANDLE SEARCH CALLED");
     if (inputValue.trim() !== '') {
       setSearchAndRedirect(inputValue);
+      setInputValue('');
       console.log("SEARCHED!");
     }
   }
