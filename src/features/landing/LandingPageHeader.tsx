@@ -1,5 +1,5 @@
 import React from 'react'
-import RedirectingSearchbar from '../../components/Searchbar/RedirectingSearchbar'
+//import RedirectingSearchbar from '../../components/Searchbar/RedirectingSearchbar'
 import ViewFullSiteBtn from '../../components/ViewFullSiteBtn'
 
 const LandingPageHeader = () => {
@@ -10,7 +10,7 @@ const LandingPageHeader = () => {
                     Watchverse
                 </p>
             </div>
-            <RedirectingSearchbar path='/home' />
+            {/*<RedirectingSearchbar path='/home' />*/}
             <ViewFullSiteBtn />
         </div>
     )

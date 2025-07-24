@@ -4,14 +4,14 @@ import BrandLink from './BrandLink'
 import HideFlexOnMd from '../utilComponents/HideFlexOnMd'
 import ShowFlexOnMd from '../utilComponents/ShowFlexOnMd'
 import NavMenuIcon from './NavMenuIcon'
-import NavSearchbar from '../Searchbar/NavSearchbar'
+//import NavSearchbar from '../Searchbar/NavSearchbar'
 
 const Mainbar = () => {
   return (
     <div className='flex justify-between items-center w-full min-h-full pl-1 pr-1'>
         <div className='flex justify-center items-center'>
            <HideFlexOnMd><BrandLink/></HideFlexOnMd>
-           <ShowFlexOnMd><div className='left-nav-search-bar'><NavSearchbar/></div></ShowFlexOnMd>
+           {/*<ShowFlexOnMd><div className='left-nav-search-bar'><NavSearchbar/></div></ShowFlexOnMd>*/}
         </div>
         <div className='flex items-center justify-center gap-6'>
             <HideFlexOnMd><Navlink content='Home' href='/home'/></HideFlexOnMd>
@@ -21,7 +21,7 @@ const Mainbar = () => {
         </div>
         <div>
           <ShowFlexOnMd><NavMenuIcon/></ShowFlexOnMd>
-          <HideFlexOnMd><div className='right-nav-search-bar'><NavSearchbar/></div></HideFlexOnMd>
+          {/*<HideFlexOnMd><div className='right-nav-search-bar'><NavSearchbar/></div></HideFlexOnMd>*/}
         </div>
     </div>
   )

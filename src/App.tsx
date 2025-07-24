@@ -8,6 +8,7 @@ import MoviesPage from './features/movies/MoviesPage'
 import TvShowsPage from './features/tvshows/TvShowsPage'
 import TopImdbPage from './features/topImdb/TopImdbPage'
 import OverviewPage from './features/overview/OverviewPage'
+import SearchPage from './app/SearchPage'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
       {path:'movies',element:<MoviesPage/>},
       {path:'tv-shows',element:<TvShowsPage/>},
       {path:'top-imdb',element:<TopImdbPage/>},
-      {path:'overview/:type/:id',element:<OverviewPage/>}
+      {path:'overview/:type/:id',element:<OverviewPage/>},
+      {path:'search',element:<SearchPage/>}
     ],
     errorElement:<NotFoundPage/>
   }

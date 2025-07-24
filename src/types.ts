@@ -14,10 +14,7 @@ type StatusError = {
 //CONTEXT
 export type SearchContextType = {
   searchValue: string,
-  setSearchValue: (val:string) => void,
-  setSearchAndNavigate: (value: string, path: string) => void,
-  searchSubmitted: boolean;
-  setSearchSubmitted: (val: boolean) => void;
+  setSearchAndRedirect: (val:string) => void,
 };
 export type SidebarContextType = {
   enabled: boolean,
@@ -81,12 +78,12 @@ export type OverviewContainerProps = {
 //HOOK TYPES
 export type TMDBResponse = {
   page: number;
-  results: TMDBData[];
+  results: TMDBMovieData[];
   total_pages: number;
   total_results: number;
 };
 //GENERAL
-export type TMDBData = {
+export type TMDBMovieData = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -99,6 +96,22 @@ export type TMDBData = {
   release_date: string;
   title: string;
   video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+export type TMDBTVData = {
+  adult: boolean;
+  backdrop_path: string | null;
+  first_air_date: string;
+  genre_ids: number[];
+  id: number;
+  name: string;
+  original_language: string;
+  original_name: string;
+  origin_country: string[];
+  overview: string;
+  popularity: number;
+  poster_path: string | null;
   vote_average: number;
   vote_count: number;
 };
@@ -153,7 +166,7 @@ export type TMDBTVDetails = {
   last_air_date: string;
   created_by: { id: number; name: string }[];
 };
-export type MediaType = 'MOVIE' | 'TV';
+export type MediaType = 'ALL' |'MOVIE' | 'TV';
 export type MediaFilter = typeof TMDB_FILTERS[number];
 export type Status = StatusSuccess | StatusLoading | StatusError;
 //RETURN TYPES

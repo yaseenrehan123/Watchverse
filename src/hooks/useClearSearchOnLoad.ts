@@ -1,3 +1,4 @@
+/*
 import { useEffect } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 
@@ -13,3 +14,4 @@ export default function useClearSearchOnLoad(){
        
     },[])
 };
+*/

@@ -1,26 +1,20 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { SearchContextType } from "../types";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate} from "react-router-dom";
 
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export function SearchContextProvider({ children }: { children: React.ReactNode }) {
     const [searchValue, setSearchValue] = useState<string>('');
-    const [searchSubmitted, setSearchSubmitted] = useState<boolean>(false);
     const navigate = useNavigate();
-    const setSearchAndNavigate = (value: string, path: string) => {
+    const setSearchAndRedirect = (value: string) => {
         setSearchValue(value);
-        setSearchSubmitted(true);
-        navigate(path);
+        navigate(`/search?q=${encodeURIComponent(value)}&page=${encodeURIComponent(1)}`);
     };
-    useEffect(()=>{
-        console.log("SEARCH SUBMITTED:",searchSubmitted)
-    },[searchSubmitted]);
     return (
         <SearchContext.Provider value={{
-            searchValue: searchValue, setSearchValue: setSearchValue, setSearchAndNavigate: setSearchAndNavigate,
-            searchSubmitted: searchSubmitted, setSearchSubmitted: setSearchSubmitted
+            searchValue: searchValue, setSearchAndRedirect:setSearchAndRedirect
         }}>
             {children}
         </SearchContext.Provider>

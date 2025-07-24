@@ -1,27 +1,30 @@
 import { useEffect, useState } from "react";
-import type { Status, TMDBResponse, useFetchMediaDataOptions, useFetchMediaDataResult } from "../types";
-import { useDebouncedSearchContext } from "../contexts/DebouncedSearchContext";
+import type { Status, TMDBMovieData, TMDBResponse, TMDBTVData, useFetchMediaDataOptions, useFetchMediaDataResult } from "../types";
 import { useMediaTypeContext } from "../contexts/MediaTypeContext";
 import { useMediaFilterContext } from "../contexts/MediaFilterContext";
 import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export default function useFetchMediaData(): useFetchMediaDataResult {
-    const [moviesData, setMoviesData] = useState<TMDBResponse | undefined>();
+    const [response, setResponse] = useState<TMDBResponse | undefined>();
     const [status, setStatus] = useState<Status | undefined>();
-    const { debouncedSearchValue } = useDebouncedSearchContext();
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get('q') || '';
+    const rawPage: number = Number(searchParams.get('page'));
+    const currentPage:number = rawPage && Number(rawPage) > 0 ? Number(rawPage) : 1;
     const { type } = useMediaTypeContext();
     const { filter } = useMediaFilterContext();
-    const { currentPage, setTotalPages } = useMediaPaginationContext();
+    const { setTotalPages } = useMediaPaginationContext();
     useEffect(() => {
-        const query: string = debouncedSearchValue;
-        const BASE_URL: string = query ?
-            type === 'MOVIE'
-                ? 'https://api.themoviedb.org/3/search/movie'
-                : 'https://api.themoviedb.org/3/search/tv'
-            :
-            type === 'MOVIE'
-                ? 'https://api.themoviedb.org/3/discover/movie'
-                : 'https://api.themoviedb.org/3/discover/tv';
+        const MOVIE_URL:string = query 
+        ? 'https://api.themoviedb.org/3/search/movie' 
+        : 'https://api.themoviedb.org/3/discover/movie';
+        const TV_URL:string = query 
+        ? 'https://api.themoviedb.org/3/search/tv' 
+        : 'https://api.themoviedb.org/3/discover/tv';
+        const URLArr: string[] = type === 'MOVIE' ? [MOVIE_URL]
+            : type === 'TV' ? [TV_URL]
+            : [MOVIE_URL,TV_URL]
         const FILTER: string =
             filter === 'POPULAR' ? 'sort_by=popularity.desc'
                 : filter === 'TRENDING' ? 'sort_by=vote_average.desc'
@@ -39,16 +42,38 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
         const fetchMedia = async () => {
             try {
                 setStatus({ state: 'Loading' });
-                const endpoint: string = query
-                    ? `${BASE_URL}?query=${encodeURIComponent(query)}&page=${currentPage}`
-                    : `${BASE_URL}?${FILTER}&page=${currentPage}`;
-                const response = await fetch(endpoint, OPTIONS);
-                if (!response.ok) {
-                    setStatus({ state: 'Error', message: 'Something went wrong...' });
-                    throw new Error("FAILED TO FETCH DATA FROM TMDB!");
+                const endpoint:string[] = URLArr.map(baseURL => query 
+                    ? `${baseURL}?query=${encodeURIComponent(query)}&page=${currentPage}`
+                    : `${baseURL}?${FILTER}&page=${currentPage}`
+                )
+                const responses = await Promise.all(endpoint.map(url => fetch(url,OPTIONS)));
+
+                if(responses.some(response => !response.ok)){
+                    throw new Error("ONE OF THE REQUESTS FAILED!")
                 }
-                const data: TMDBResponse = await response.json();
-                setMoviesData(data);
+
+                const allData:TMDBResponse[] = await Promise.all(responses.map(response => response.json()));
+                
+                let finalResult:TMDBResponse;
+
+                if(allData.length > 1){
+                    const mergedResults:TMDBMovieData[] | TMDBTVData[] = allData.flatMap(data => data.results);
+                    const itemsPerPage:number = 20;
+                    const totalResults:number = mergedResults.length;
+                    const totalPages:number = Math.ceil(totalResults / itemsPerPage);
+                    const startIndex:number = (currentPage - 1) * itemsPerPage;
+                    const paginatedResults = mergedResults.slice(startIndex,startIndex + itemsPerPage);
+                    finalResult = {
+                        ...allData[0],
+                        results:paginatedResults,
+                        total_results:totalResults,
+                        total_pages:totalPages
+                    }
+                }
+                else{
+                    finalResult = allData[0];
+                }
+                setResponse(finalResult);
                 setStatus({ state: 'Success' });
             }
             catch (error) {
@@ -57,13 +82,13 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
             }
         };
         fetchMedia();
-    }, [type, filter, debouncedSearchValue, currentPage]);
+    }, [type, filter, currentPage]);
 
     useEffect(() => {
-        if (status?.state === 'Success' && moviesData?.total_pages) {
-            setTotalPages(moviesData.total_pages);
+        if (status?.state === 'Success' && response?.total_pages) {
+            setTotalPages(response.total_pages);
         }
-    }, [status, moviesData]);
+    }, [status, response]);
 
     if (!status) {
         return {
@@ -72,12 +97,13 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
         };
     };
     if (status?.state === 'Success') {
-        if (moviesData === undefined || status === undefined) {
+        if (response === undefined || status === undefined) {
             throw new Error("RESULT NULL ON SUCCESS!");
         };
+        console.log(response);
     };
     const result: useFetchMediaDataResult = {
-        data: moviesData,
+        data: response,
         status: status!
     };
     return result;

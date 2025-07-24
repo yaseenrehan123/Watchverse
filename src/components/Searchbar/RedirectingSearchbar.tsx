@@ -1,3 +1,4 @@
+/*
 import React from 'react'
 import { FaSearch } from "react-icons/fa";
 import { useSearchContext } from '../../contexts/SearchContext';
@@ -24,3 +25,4 @@ const RedirectingSearchbar = ({ path }: RedirectingSearchbarProps) => {
 }
 
 export default RedirectingSearchbar
+*/

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import useClearSearchOnLoad from '../../hooks/useClearSearchOnLoad'
-import { useMediaTypeContext } from '../../contexts/MediaTypeContext';
-import { useMediaFilterContext } from '../../contexts/MediaFilterContext';
+//import useClearSearchOnLoad from '../../hooks/useClearSearchOnLoad'
 import MoviesHeader from './MoviesHeader';
 import MoviesContent from './MoviesContent';
 import { useResetPaginationOnLoad } from '../../hooks/useResetPaginationOnLoad';
@@ -9,7 +7,7 @@ import useSetMediaTypeOnLoad from '../../hooks/useSetMediaTypeOnLoad';
 import useSetMediaFilterOnLoad from '../../hooks/useSetMediaFilterOnLoad';
 
 const MoviesPage = () => {
-    useClearSearchOnLoad();
+    //useClearSearchOnLoad();
     useResetPaginationOnLoad();
     useSetMediaTypeOnLoad('MOVIE');
     useSetMediaFilterOnLoad('POPULAR');
