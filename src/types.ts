@@ -169,6 +169,15 @@ export type TMDBTVDetails = {
 export type MediaType = 'ALL' |'MOVIE' | 'TV';
 export type MediaFilter = typeof TMDB_FILTERS[number];
 export type Status = StatusSuccess | StatusLoading | StatusError;
+export type CategoryFilter = "movie" | "tv";
+export type SortFilter = 'popularity' | 'trending' | 'new' | 'top_imdb';
+export type FilterParams = {
+  category?:CategoryFilter,
+  sort?:SortFilter,
+  genre?:string,
+  year?:string,
+  country?:string
+}
 //RETURN TYPES
 export type useFetchMediaDataResult = {
   data: TMDBResponse | undefined,

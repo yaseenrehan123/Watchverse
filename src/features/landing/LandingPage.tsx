@@ -1,6 +1,7 @@
 import React from 'react'
 import FAQ from '../faq/FAQ'
 import LandingPageHeader from './LandingPageHeader'
+import useFetchMediaGenres from '../../hooks/useFetchMediaGenres'
 
 const LandingPage = () => {
   return (

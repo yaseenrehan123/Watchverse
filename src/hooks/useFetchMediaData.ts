@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import type { Status, TMDBMovieData, TMDBResponse, TMDBTVData, useFetchMediaDataOptions, useFetchMediaDataResult } from "../types";
+import type { CategoryFilter, FilterParams, SortFilter, Status, TMDBMovieData, TMDBResponse, TMDBTVData, useFetchMediaDataOptions, useFetchMediaDataResult } from "../types";
 import { useMediaTypeContext } from "../contexts/MediaTypeContext";
 import { useMediaFilterContext } from "../contexts/MediaFilterContext";
 import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
 import { useParams, useSearchParams } from "react-router-dom";
+import useMediaFilters from "./useMediaFilters";
 
 export default function useFetchMediaData(): useFetchMediaDataResult {
     const [response, setResponse] = useState<TMDBResponse | undefined>();
@@ -11,26 +12,38 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q') || '';
     const rawPage: number = Number(searchParams.get('page'));
-    const currentPage:number = rawPage && Number(rawPage) > 0 ? Number(rawPage) : 1;
-    const { type } = useMediaTypeContext();
-    const { filter } = useMediaFilterContext();
+    const currentPage: number = rawPage && Number(rawPage) > 0 ? Number(rawPage) : 1;
+    const [filters, setFilters] = useMediaFilters();
+    const allFilters: string[] = [];
+    const category: CategoryFilter = filters?.category ?? 'movie';
+    const sort: SortFilter = filters?.sort ?? 'popularity';
+    const genre: string = filters?.genre ?? '';
+    const year:string = filters?.year ?? '';
+    const country:string = filters?.country ?? '';
+    const sortValue: string =
+        sort === 'popularity' ? 'popularity.desc'
+            : sort === 'trending' ? 'vote_average.desc'
+                : sort === 'new' ? `release_date.desc`
+                    : sort === 'top_imdb' ? 'vote_average.desc'
+                        : 'sort_by=popularity.desc'; //DEFAULT
+    if (sort === 'new') allFilters.push(`primary_release_date.lte=${new Date().toISOString().split('T')[0]}`);
+    if(sort === 'top_imdb') allFilters.push(`vote_count.gte=1000`);
+    if (sort) allFilters.push(`sort_by=${sortValue}`);
+    if (genre) allFilters.push(`with_genres=${genre}`);
+    if(year) allFilters.push(`primary_release_year=${year}`);
+    if(country) allFilters.push(`with_origin_country=${country}`);
     const { setTotalPages } = useMediaPaginationContext();
     useEffect(() => {
-        const MOVIE_URL:string = query 
-        ? 'https://api.themoviedb.org/3/search/movie' 
-        : 'https://api.themoviedb.org/3/discover/movie';
-        const TV_URL:string = query 
-        ? 'https://api.themoviedb.org/3/search/tv' 
-        : 'https://api.themoviedb.org/3/discover/tv';
-        const URLArr: string[] = type === 'MOVIE' ? [MOVIE_URL]
-            : type === 'TV' ? [TV_URL]
-            : [MOVIE_URL,TV_URL]
-        const FILTER: string =
-            filter === 'POPULAR' ? 'sort_by=popularity.desc'
-                : filter === 'TRENDING' ? 'sort_by=vote_average.desc'
-                    : filter === 'NEW' ? `sort_by=release_date.desc&primary_release_date.lte=${new Date().toISOString().split('T')[0]}`
-                        : filter === 'TOP_IMDB' ? 'sort_by=vote_average.desc&vote_count.gte=1000'
-                            : 'sort_by=popularity.desc'; //DEFAULT
+        const MOVIE_URL: string = query
+            ? 'https://api.themoviedb.org/3/search/movie'
+            : 'https://api.themoviedb.org/3/discover/movie';
+        const TV_URL: string = query
+            ? 'https://api.themoviedb.org/3/search/tv'
+            : 'https://api.themoviedb.org/3/discover/tv';
+        const baseURL: string = category === 'movie'
+            ? MOVIE_URL
+            : TV_URL;
+
         const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
         const OPTIONS = {
             method: 'GET',
@@ -42,38 +55,16 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
         const fetchMedia = async () => {
             try {
                 setStatus({ state: 'Loading' });
-                const endpoint:string[] = URLArr.map(baseURL => query 
-                    ? `${baseURL}?query=${encodeURIComponent(query)}&page=${currentPage}`
-                    : `${baseURL}?${FILTER}&page=${currentPage}`
-                )
-                const responses = await Promise.all(endpoint.map(url => fetch(url,OPTIONS)));
+                const endpoint: string = query
+                    ? `${baseURL}?query=${encodeURIComponent(query)}&page=${currentPage}&${allFilters.join('&')}`
+                    : `${baseURL}?${allFilters.join('&')}&page=${currentPage}`
 
-                if(responses.some(response => !response.ok)){
-                    throw new Error("ONE OF THE REQUESTS FAILED!")
+                const response = await fetch(endpoint, OPTIONS);
+                if (!response.ok) {
+                    throw new Error("RESPONSE FAILED!");
                 }
-
-                const allData:TMDBResponse[] = await Promise.all(responses.map(response => response.json()));
-                
-                let finalResult:TMDBResponse;
-
-                if(allData.length > 1){
-                    const mergedResults:TMDBMovieData[] | TMDBTVData[] = allData.flatMap(data => data.results);
-                    const itemsPerPage:number = 20;
-                    const totalResults:number = mergedResults.length;
-                    const totalPages:number = Math.ceil(totalResults / itemsPerPage);
-                    const startIndex:number = (currentPage - 1) * itemsPerPage;
-                    const paginatedResults = mergedResults.slice(startIndex,startIndex + itemsPerPage);
-                    finalResult = {
-                        ...allData[0],
-                        results:paginatedResults,
-                        total_results:totalResults,
-                        total_pages:totalPages
-                    }
-                }
-                else{
-                    finalResult = allData[0];
-                }
-                setResponse(finalResult);
+                const data = await response.json();
+                setResponse(data);
                 setStatus({ state: 'Success' });
             }
             catch (error) {
@@ -82,7 +73,7 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
             }
         };
         fetchMedia();
-    }, [type, filter, currentPage,query]);
+    }, [category, sort, currentPage, query]);
 
     useEffect(() => {
         if (status?.state === 'Success' && response?.total_pages) {
