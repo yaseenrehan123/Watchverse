@@ -5,9 +5,8 @@ const MediaPaginationContext = createContext<MediaPaginationContextType | undefi
 
 export function MediaPaginationContextProvider({children}:{children:React.ReactNode}) {
     const [totalPages,setTotalPages] = useState<number>(1);
-    const [page,setPage] = useState<number>(1);
     return (
-        <MediaPaginationContext.Provider value={{totalPages:totalPages , setTotalPages:setTotalPages , currentPage:page, setPage:setPage}}>
+        <MediaPaginationContext.Provider value={{totalPages:totalPages , setTotalPages:setTotalPages}}>
             {children}
         </MediaPaginationContext.Provider>
     )

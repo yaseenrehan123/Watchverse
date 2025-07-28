@@ -20,26 +20,12 @@ export type SidebarContextType = {
   enabled: boolean,
   setEnabled: Function
 };
-export type DebouncedSearchContextType = {
-  debouncedSearchValue: string,
-  setDebouncedSearchValue:(val:string)=>void
-}
-export type MediaTypeContextType = {
-  type:MediaType,
-  setType:(value:MediaType) => void
-}
-export type MediaFilterContextType = {
-  filter:MediaFilter,
-  setFilter:(value:MediaFilter) => void
-}
 export type MediaPaginationContextType = {
   totalPages:number,
   setTotalPages:(val:number)=>void,
-  currentPage:number,
-  setPage:(val:number)=>void;
 };
 export type MediaGenreContextType = {
-  genres:GenreData[] | undefined,
+  genres:GenreData[],
   status:Status
 };
 export type MediaCountriesContextType = {
@@ -98,7 +84,11 @@ export type FilterOptionsContainerProps = {
   enabled:boolean,
 }
 export type MediaFiltersContainerProps = {
-  
+  enableCategoryFilter:boolean,
+  enableSortFilter:boolean,
+  enableYearFilter:boolean,
+  enableGenreFilter:boolean,
+  enableCountryFilter:boolean
 }
 //HOOK TYPES
 export type TMDBResponse = {
@@ -211,6 +201,10 @@ export type FilterParams = {
   genre?:string,
   year?:string,
   country?:string
+};
+export type FilterOption = {
+  label:string,
+  value:string
 }
 //RETURN TYPES
 export type useFetchMediaDataResult = {

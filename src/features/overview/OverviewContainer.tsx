@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import type { OverviewContainerProps } from '../../types';
-import { useOverviewDataContext } from '../../contexts/OverviewDataContext';
 import BackdropImage from './BackdropImage';
 import BackdropGradient from './BackdropGradient';
 import Poster from './Poster';

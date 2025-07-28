@@ -1,9 +1,9 @@
 import { useMediaCountriesContext } from "../contexts/MediaCountriesContext";
-import type { CountriesData } from "../types";
+import type { CountriesData, FilterOption } from "../types";
 
 export default function getCountriesOptions(){
     const {countries,status} = useMediaCountriesContext();
-    let options:{label:string,value:string}[] = [];
+    let options:FilterOption[] = [];
     if(status.state === 'Success'){
         const sorted = [...countries].sort((a,b)=>{
             return a.english_name.localeCompare(b.english_name);

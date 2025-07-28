@@ -2,8 +2,6 @@ import React from 'react'
 import Navbar from '../components/navbar/Navbar'
 import { Outlet } from 'react-router-dom'
 import GlobalProviders from './GlobalProviders'
-import useFetchMediaGenres from '../hooks/useFetchMediaGenres'
-import useFetchMediaCountriesData from '../hooks/useFetchMediaCountriesData'
 
 const Layout = () => {
   return (

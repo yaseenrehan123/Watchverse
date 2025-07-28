@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 
 const MediaPagination = () => {
     const [searchParams,setSearchParams] = useSearchParams();
-    const {totalPages,setPage} = useMediaPaginationContext();
+    const {totalPages} = useMediaPaginationContext();
     const rawPage: number = Number(searchParams.get('page'));
     const currentPage:number = rawPage && Number(rawPage) > 0 ? Number(rawPage) : 1;
     const visiblePageCount = 5;
@@ -23,8 +23,8 @@ const MediaPagination = () => {
         setSearchParams(newParams);
     }
     return (
-        <div className='flex items-center justify-center w-screen border-2 border-red-500'>
-            <div className='border-2 border-green-500 min-h-10 flex items-center justify-center gap-2'>
+        <div className='flex items-center justify-center w-screen'>
+            <div className='min-h-10 flex items-center justify-center gap-2'>
                 {currentPage > 1 && (
                     <MediaPaginationButton content='<-' selected={false} onClick={() => onButtonClick(currentPage - 1)} />
                 )}

@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import type { MediaType, MediaFilter } from '../../types';
-import MediaFilterDropdown from '../../components/media/MediaFilterDropdown';
-import ContentTypeSelection from '../../components/media/ContentTypeSelection';
 import MediaContainer from '../../components/media/MediaContainer';
 import MediaFiltersContainer from '../../components/mediaFilters/MediaFiltersContainer';
 
