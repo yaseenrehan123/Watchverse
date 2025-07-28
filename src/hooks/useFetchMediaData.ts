@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import type { CategoryFilter, FilterParams, SortFilter, Status, TMDBMovieData, TMDBResponse, TMDBTVData, useFetchMediaDataOptions, useFetchMediaDataResult } from "../types";
-import { useMediaTypeContext } from "../contexts/MediaTypeContext";
-import { useMediaFilterContext } from "../contexts/MediaFilterContext";
 import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
 import { useParams, useSearchParams } from "react-router-dom";
 import useMediaFilters from "./useMediaFilters";
@@ -73,7 +71,7 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
             }
         };
         fetchMedia();
-    }, [category, sort, currentPage, query]);
+    }, [category, sort, genre, year, country, currentPage, query]);
 
     useEffect(() => {
         if (status?.state === 'Success' && response?.total_pages) {

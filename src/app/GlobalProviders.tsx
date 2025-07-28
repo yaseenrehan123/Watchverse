@@ -5,6 +5,8 @@ import { SidebarContextProvider } from '../contexts/SidebarContext'
 import { MediaTypeContextProvider } from '../contexts/MediaTypeContext'
 import { MediaFilterContextProvider } from '../contexts/MediaFilterContext'
 import { MediaPaginationContextProvider } from '../contexts/MediaPaginationContext'
+import { MediaGenreContextProvider } from '../contexts/MediaGenreContext'
+import { MediaCountriesContextProvider } from '../contexts/MediaCountriesContext'
 
 const GlobalProviders = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -15,7 +17,11 @@ const GlobalProviders = ({ children }: { children: React.ReactNode }) => {
                         <MediaTypeContextProvider>
                             <MediaFilterContextProvider>
                                 <MediaPaginationContextProvider>
-                                    {children}
+                                    <MediaGenreContextProvider>
+                                        <MediaCountriesContextProvider>
+                                            {children}
+                                        </MediaCountriesContextProvider>
+                                    </MediaGenreContextProvider> 
                                 </MediaPaginationContextProvider>
                             </MediaFilterContextProvider>
                         </MediaTypeContextProvider>

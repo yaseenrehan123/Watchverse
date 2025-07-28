@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Status } from "../types";
+import type { GenreData, Status } from "../types";
 
 export default function useFetchMediaGenres(): { data: any | undefined, status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
@@ -43,7 +43,7 @@ export default function useFetchMediaGenres(): { data: any | undefined, status: 
         }
     };
     return {
-        data:data,
+        data:data!,
         status:status
     };
 

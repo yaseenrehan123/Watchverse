@@ -37,6 +37,14 @@ export type MediaPaginationContextType = {
   setTotalPages:(val:number)=>void,
   currentPage:number,
   setPage:(val:number)=>void;
+};
+export type MediaGenreContextType = {
+  genres:GenreData[] | undefined,
+  status:Status
+};
+export type MediaCountriesContextType = {
+  countries:CountriesData[],
+  status:Status
 }
 //PROPS
 export type NavlinkProps = {
@@ -74,6 +82,23 @@ export type OverviewContainerProps = {
   casts:string[],
   country:string,
   production:string[]
+}
+export type FilterOptionProps = {
+  value:string,
+  title:string,
+  enabled?:boolean,
+  selected?:boolean,
+  onClick?:()=>void
+}
+export type FilterOptionsContainerProps = {
+  section:string,
+  options:{label:string,value:string,onSelected?:Function}[],
+  filterKey:string
+  multiple?:boolean,
+  enabled:boolean,
+}
+export type MediaFiltersContainerProps = {
+  
 }
 //HOOK TYPES
 export type TMDBResponse = {
@@ -166,6 +191,15 @@ export type TMDBTVDetails = {
   last_air_date: string;
   created_by: { id: number; name: string }[];
 };
+export type GenreData = {
+  id:number,
+  name:string
+}
+export type CountriesData ={
+  english_name:string,
+  iso_3166_1:string,
+  native_name:string
+}
 export type MediaType = 'ALL' |'MOVIE' | 'TV';
 export type MediaFilter = typeof TMDB_FILTERS[number];
 export type Status = StatusSuccess | StatusLoading | StatusError;

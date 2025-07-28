@@ -9,3 +9,10 @@
   --font-roboto: "Roboto", sans-serif;
   --font-montserrat: "Montserrat", sans-serif;
 }
+.media-filters-container::-webkit-scrollbar {
+  display: none;
+}
+.media-filters-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
