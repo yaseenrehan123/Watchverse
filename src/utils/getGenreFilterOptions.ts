@@ -9,6 +9,7 @@ export default function getGenreFilterOptions(){
         genres.forEach((genre: GenreData) => {
             genreOptions.push({ label: genre.name, value: genre.id.toString() });
         });
-    };
+        genreOptions.splice(0,0,{label:'All',value:''})
+    };  
     return genreOptions;
 };

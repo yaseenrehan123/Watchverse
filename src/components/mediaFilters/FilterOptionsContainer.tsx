@@ -1,20 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import type { FilterOptionsContainerProps } from '../../types'
+import type { FilterOptionsContainerProps, FilterParams } from '../../types'
 import FilterOption from './FilterOption'
 import useMediaFilters from '../../hooks/useMediaFilters';
 import ColumnDividerThin from '../utilComponents/ColumnDividerThin';
 
-const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey }: FilterOptionsContainerProps) => {
+const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey,defaultValues }: FilterOptionsContainerProps) => {
   const storageKey: string = `filterOptionsHidden-${section}`
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [hidden, setHidden] = useState<boolean>(() => sessionStorage.getItem(storageKey) === 'true');
   const [filters, setFilters] = useMediaFilters();
+
+  const getInitial = () => {
+    const raw = filters[filterKey];
+    if (!raw) return defaultValues ?? [];
+    return raw.split(',');
+  };
   const toggleVisibility = () => {
     const newVal: boolean = !hidden;
     setHidden(newVal);
     sessionStorage.setItem(storageKey, JSON.stringify(newVal));
   }
+  useEffect(()=>{
+    setSelectedValues(getInitial())
+  },[filters])
   return (
     <div className='flex flex-col gap-3.5 items-start w-full'>
       <ColumnDividerThin />

@@ -79,9 +79,10 @@ export type FilterOptionProps = {
 export type FilterOptionsContainerProps = {
   section:string,
   options:{label:string,value:string,onSelected?:Function}[],
-  filterKey:string
+  filterKey:keyof FilterParams
   multiple?:boolean,
   enabled:boolean,
+  defaultValues?:string[]
 }
 export type MediaFiltersContainerProps = {
   enableCategoryFilter:boolean,

@@ -5,6 +5,7 @@ import getGenreFilterOptions from '../../utils/getGenreFilterOptions'
 import getYearFilterOptions from '../../utils/getYearFilterOptions'
 import getCountriesOptions from '../../utils/getCountriesOptions'
 import type { MediaFiltersContainerProps } from '../../types'
+import { FaFilter } from "react-icons/fa";
 const MediaFiltersContainer = (props: Partial<MediaFiltersContainerProps>) => {
   const {
     enableCategoryFilter = true,
@@ -21,7 +22,7 @@ const MediaFiltersContainer = (props: Partial<MediaFiltersContainerProps>) => {
   return (
     <div className='flex items-center justify-center gap-2'>
       <div className='hover:text-cyan-600 hover:scale-98 hover:cursor-pointer transition-all duration-150 font-bold
-      text-5xl text-cyan-500' onClick={() => setMenuEnabled(true)}>Filters</div>
+      text-5xl text-cyan-500 flex items-center gap-3' onClick={() => setMenuEnabled(true)}><span>Filters</span><FaFilter className='text-3xl translate-y-1 sm:text-4xl'/></div>
       <AnimatePresence>
         {menuEnabled &&
           <MotionConfig transition={{ duration: 0.5, bounce: 0.1, type: 'spring' }}>
@@ -44,6 +45,7 @@ const MediaFiltersContainer = (props: Partial<MediaFiltersContainerProps>) => {
                   ]}
                   enabled={enableCategoryFilter}
                   filterKey='category'
+                  defaultValues={['movie']}
                 />
                 <FilterOptionsContainer
                   section='Sort:'
@@ -55,12 +57,14 @@ const MediaFiltersContainer = (props: Partial<MediaFiltersContainerProps>) => {
                   ]}
                   enabled={enableSortFilter}
                   filterKey='sort'
+                  defaultValues={['popularity']}
                 />
                 <FilterOptionsContainer
                   section='Year:'
                   options={[...yearOptions]}
                   enabled={enableYearFilter}
                   filterKey='year'
+                  defaultValues={['']}
                 />
                 <FilterOptionsContainer
                   section='Genres:'
@@ -68,12 +72,14 @@ const MediaFiltersContainer = (props: Partial<MediaFiltersContainerProps>) => {
                   enabled={enableGenreFilter}
                   multiple={true}
                   filterKey='genre'
+                  defaultValues={['']}
                 />
                 <FilterOptionsContainer
                   section='Country:'
                   options={[...countriesOptions]}
                   enabled={enableCountryFilter}
                   filterKey='country'
+                  defaultValues={['']}
                 />
                 <div className='flex items-center w-full pl-1.5'>
                   <button className='text-center w-20 h-12 bg-neutral-800 rounded-[8px] text-white font-roboto font-bold
