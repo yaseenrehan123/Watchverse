@@ -5,7 +5,7 @@ const FilterOption = ({enabled,title,selected,onClick}:FilterOptionProps) => {
   return (
     <div className='flex items-center justify-center gap-2.5'>
         <div className={`w-6 h-6 rounded-2xl ${selected ?
-        'bg-blue-500 flex items-center justify-center' 
+        'bg-blue-500 flex items-center justify-center outline-[3.5px] outline-blue-700' 
         : enabled ? 'bg-white hover:cursor-pointer' 
         : 'bg-neutral-800'} transition-all duration-150`}
         onClick={()=> enabled && onClick?.()}>{selected && 
