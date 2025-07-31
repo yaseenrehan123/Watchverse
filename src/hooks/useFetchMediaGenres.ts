@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
 import type { GenreData, Status } from "../types";
+import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
 
 export default function useFetchMediaGenres(): { data: any | undefined, status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
     const [data,setData] = useState<any | undefined>(undefined);
     useEffect(() => {
         const fetchGenres = async () => {
-            const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
-            const OPTIONS = {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                    Authorization: `Bearer ${API_KEY}`
-                }
-            }
+            const OPTIONS = getTMDBFetchOptions();
             try {
                 setStatus({state:'Loading'});
                 const response = await fetch('https://api.themoviedb.org/3/genre/movie/list',OPTIONS);

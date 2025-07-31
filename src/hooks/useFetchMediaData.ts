@@ -3,6 +3,7 @@ import type { CategoryFilter, FilterParams, SortFilter, Status, TMDBMovieData, T
 import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
 import { useParams, useSearchParams } from "react-router-dom";
 import useMediaFilters from "./useMediaFilters";
+import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
 
 export default function useFetchMediaData(): useFetchMediaDataResult {
     const [response, setResponse] = useState<TMDBResponse | undefined>();
@@ -42,14 +43,7 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
             ? MOVIE_URL
             : TV_URL;
 
-        const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
-        const OPTIONS = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${API_KEY}`
-            }
-        };
+       const OPTIONS = getTMDBFetchOptions();
         const fetchMedia = async () => {
             try {
                 setStatus({ state: 'Loading' });

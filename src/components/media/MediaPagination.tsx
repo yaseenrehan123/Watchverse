@@ -1,6 +1,5 @@
 import React from 'react'
 import MediaPaginationButton from './MediaPaginationButton'
-import type { MediaPaginationProps } from '../../types';
 import { useMediaPaginationContext } from '../../contexts/MediaPaginationContext';
 import { useSearchParams } from 'react-router-dom';
 

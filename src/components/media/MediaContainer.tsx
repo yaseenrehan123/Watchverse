@@ -5,7 +5,6 @@ import ErrorText from '../utilComponents/ErrorText';
 import ShowCard from './ShowCard';
 import useFetchMediaData from '../../hooks/useFetchMediaData';
 import MediaPagination from './MediaPagination';
-import { TMDBTypeToUrl } from '../../utils/TMDBTypeToUrl';
 
 const MediaContainer = () => {
     const { data, status }: useFetchMediaDataResult = useFetchMediaData();
@@ -33,7 +32,7 @@ const MediaContainer = () => {
                             rating:typeof item.vote_average === 'number' ? item.vote_average.toFixed(1) : 'N/A',
                             year:item.release_date?.split('-')[0] ?? 'N/A',
                             title:item.title,
-                            link:`/overview/${TMDBTypeToUrl('MOVIE')}/${item.id}`
+                            link:`/overview/movie/${item.id}`
                         }
                     }
                     else{
@@ -42,7 +41,7 @@ const MediaContainer = () => {
                             rating:typeof item.vote_average === 'number' ? item.vote_average.toFixed(1) : 'N/A',
                             year:item.first_air_date?.split('-')[0] ?? 'N/A',
                             title:item.name,
-                            link:`/overview/${TMDBTypeToUrl('TV')}/${item.id}`
+                            link:`/overview/tv/${item.id}`
                         }
                     }
                     return (<ShowCard

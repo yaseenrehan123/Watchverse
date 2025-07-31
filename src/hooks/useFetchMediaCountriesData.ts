@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { CountriesData, Status } from "../types";
+import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
 
 export default function useFetchMediaCountriesData(): { data: CountriesData[], status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
@@ -7,14 +8,7 @@ export default function useFetchMediaCountriesData(): { data: CountriesData[], s
     useEffect(() => {
         const fetchCountries = async () => {
             try {
-                const API_KEY = import.meta.env.VITE_TMDP_API_KEY;
-                const OPTIONS = {
-                    method: 'GET',
-                    headers: {
-                        accept: 'application/json',
-                        Authorization: `Bearer ${API_KEY}`
-                    }
-                };
+               const OPTIONS = getTMDBFetchOptions();
                 const response = await fetch('https://api.themoviedb.org/3/configuration/countries', OPTIONS);
                 if (!response.ok) {
                     setStatus({ state: 'Error', message: 'Something went wrong...' });

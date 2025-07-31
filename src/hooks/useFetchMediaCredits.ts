@@ -1,31 +1,23 @@
 import { useEffect, useState } from "react";
-import type { Status, MediaType } from "../types";
-import { TMDBTypeToUrl } from "../utils/TMDBTypeToUrl";
+import type { Status, CategoryFilter } from "../types";
+import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
 
-export default function useFetchMediaCredits(type: MediaType, id: string | undefined): { data: any | undefined, status: Status } {
+export default function useFetchMediaCredits(type: CategoryFilter, id: string | undefined): { data: any | undefined, status: Status } {
     const [status, setStatus] = useState<Status | undefined>(undefined);
     const [data, setData] = useState<any | undefined>(undefined);
 
     useEffect(() => {
         const fetchCredits = async () => {
-            const extensionUrl:string = TMDBTypeToUrl(type);
-            const API_KEY: string = import.meta.env.VITE_TMDP_API_KEY;
-            const OPTIONS = {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                    Authorization: `Bearer ${API_KEY}`
-                }
-            };
+            const OPTIONS = getTMDBFetchOptions();
             try {
                 setStatus({ state: 'Loading' });
-                const response = await fetch(`https://api.themoviedb.org/3/${extensionUrl}/${id}/credits?api_key=...`, OPTIONS)
+                const response = await fetch(`https://api.themoviedb.org/3/${type}/${id}/credits?api_key=...`, OPTIONS)
                 if (!response.ok) {
                     setStatus({ state: 'Error', message: 'Something went wrong...' })
                 }
                 const data = await response.json();
                 setData(data);
-                setStatus({state:'Success'});
+                setStatus({ state: 'Success' });
             }
             catch (error) {
                 setStatus({ state: 'Error', message: 'Something went wrong...' })

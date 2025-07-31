@@ -44,14 +44,6 @@ export type ShowCardProps = {
   title: string,
   link:string
 };
-export type RedirectingSearchbarProps = {
-  path: string
-}
-export type MediaPaginationProps = {
-  totalPages:number,
-  currentPage:number,
-  setPage:(val:number)=>void
-}
 export type MediaPaginationButtonProps = {
   content:string,
   selected:boolean,
@@ -191,8 +183,6 @@ export type CountriesData ={
   iso_3166_1:string,
   native_name:string
 }
-export type MediaType = 'ALL' |'MOVIE' | 'TV';
-export type MediaFilter = typeof TMDB_FILTERS[number];
 export type Status = StatusSuccess | StatusLoading | StatusError;
 export type CategoryFilter = "movie" | "tv";
 export type SortFilter = 'popularity' | 'trending' | 'new' | 'top_imdb';
@@ -214,6 +204,6 @@ export type useFetchMediaDataResult = {
 };
 //FUNCTION OPTIONS
 export type useFetchMediaDataOptions = {
-  type: MediaType,
-  filter?: MediaFilter
+  type: CategoryFilter,
+  filter?: SortFilter
 }

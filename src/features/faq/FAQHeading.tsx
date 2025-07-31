@@ -1,10 +1,10 @@
 import React from 'react'
 
-const FAQHeading = ({content}:{content:string}) => {
+const FAQHeading = ({children}:{children:React.ReactNode}) => {
   return (
     <div>
         <strong className='text-2xl'>
-            <p>{content}</p>
+            <p className='flex items-center gap-1.5'>{children}</p>
         </strong>
     </div>
   )

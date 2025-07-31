@@ -1,12 +1,12 @@
-import type { OverviewContainerProps, MediaType, TMDBMovieDetails, TMDBTVDetails } from "../types";
+import type { CategoryFilter, OverviewContainerProps, TMDBMovieDetails, TMDBTVDetails } from "../types";
 
 export default function getOverviewContainerProps
     (
-        type: MediaType,
+        type: CategoryFilter,
         data: TMDBMovieDetails | TMDBTVDetails,
         castNames: string[]
     ): OverviewContainerProps {
-    if (type === 'MOVIE') {
+    if (type === 'movie') {
         const movieData = data as TMDBMovieDetails;
         return {
             backdropImgSrc: `https://image.tmdb.org/t/p/original${movieData.backdrop_path}`,
@@ -21,7 +21,7 @@ export default function getOverviewContainerProps
             production: movieData.production_companies?.map((p: any) => p.name) || []
         } as OverviewContainerProps;
     }
-    else if (type === 'TV') {
+    else if (type === 'tv') {
         const tvShowData = data as TMDBTVDetails;
         return {
             backdropImgSrc: `https://image.tmdb.org/t/p/original${tvShowData.backdrop_path}`,
