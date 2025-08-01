@@ -9,21 +9,23 @@ import TvShowsPage from './features/tvshows/TvShowsPage'
 import TopImdbPage from './features/topImdb/TopImdbPage'
 import OverviewPage from './features/overview/OverviewPage'
 import SearchPage from './app/SearchPage'
+import useFetchMediaGenres from './hooks/useFetchMediaGenres'
+import { useGenresDataStore } from './zustand-stores/useGenresDataStore'
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:<Layout/>,
-    children:[
-      {index:true, element:<LandingPage/>},
-      {path:'home',element:<HomePage/>},
-      {path:'movies',element:<MoviesPage/>},
-      {path:'tv-shows',element:<TvShowsPage/>},
-      {path:'top-imdb',element:<TopImdbPage/>},
-      {path:'overview/:type/:id',element:<OverviewPage/>},
-      {path:'search',element:<SearchPage/>}
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <LandingPage /> },
+      { path: 'home', element: <HomePage /> },
+      { path: 'movies', element: <MoviesPage /> },
+      { path: 'tv-shows', element: <TvShowsPage /> },
+      { path: 'top-imdb', element: <TopImdbPage /> },
+      { path: 'overview/:type/:id', element: <OverviewPage /> },
+      { path: 'search', element: <SearchPage /> }
     ],
-    errorElement:<NotFoundPage/>
+    errorElement: <NotFoundPage />
   }
 ])
 
