@@ -11,11 +11,6 @@ type StatusError = {
   state: 'Error',
   message: string
 };
-//CONTEXT
-export type MediaCountriesContextType = {
-  countries:CountriesData[],
-  status:Status
-}
 //STORES
 export type SidebarStore = {
   enabled:boolean,
@@ -27,6 +22,10 @@ export type PaginationStore = {
 }
 export type GenresDataStore = {
   genres:GenreData[],
+  status:Status
+}
+export type CountriesDataStore = {
+  countries:CountriesData[],
   status:Status
 }
 //PROPS

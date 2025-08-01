@@ -8,9 +8,7 @@ const LoadGenresStore = () => {
         genres: data?.genres ?? [],
         status: status
     });
-    return (
-        <div>loadGenresStore</div>
-    )
+    return null;
 }
 
 export default LoadGenresStore
