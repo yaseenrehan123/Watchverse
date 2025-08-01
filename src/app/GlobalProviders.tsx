@@ -1,5 +1,4 @@
 import React from 'react'
-import { SearchContextProvider } from '../contexts/SearchContext'
 import { MediaGenreContextProvider } from '../contexts/MediaGenreContext'
 import { MediaCountriesContextProvider } from '../contexts/MediaCountriesContext'
 import { MediaPaginationContextProvider } from '../contexts/MediaPaginationContext'
@@ -7,15 +6,13 @@ import { MediaPaginationContextProvider } from '../contexts/MediaPaginationConte
 const GlobalProviders = ({ children }: { children: React.ReactNode }) => {
     return (
         <div>
-            <SearchContextProvider>
-                <MediaPaginationContextProvider>
-                    <MediaGenreContextProvider>
-                        <MediaCountriesContextProvider>
-                            {children}
-                        </MediaCountriesContextProvider>
-                    </MediaGenreContextProvider>
-                </MediaPaginationContextProvider>
-            </SearchContextProvider>
+            <MediaPaginationContextProvider>
+                <MediaGenreContextProvider>
+                    <MediaCountriesContextProvider>
+                        {children}
+                    </MediaCountriesContextProvider>
+                </MediaGenreContextProvider>
+            </MediaPaginationContextProvider>
         </div>
     )
 }

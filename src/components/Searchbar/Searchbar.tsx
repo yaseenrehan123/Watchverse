@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { FaSearch } from "react-icons/fa";
-import { useSearchContext } from '../../contexts/SearchContext';
+import useSetSearchAndRedirect from '../../hooks/useSetSearchAndRedirect';
 const Searchbar = () => {
-  const { setSearchAndRedirect } = useSearchContext();
   const [inputValue,setInputValue] = useState<string>('');
-
+  const setSearchAndRedirect = useSetSearchAndRedirect();
   const handleSearch = ()=>{
     console.log("HANDLE SEARCH CALLED");
     if (inputValue.trim() !== '') {

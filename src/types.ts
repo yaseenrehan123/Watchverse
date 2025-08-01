@@ -12,10 +12,6 @@ type StatusError = {
   message: string
 };
 //CONTEXT
-export type SearchContextType = {
-  searchValue: string,
-  setSearchAndRedirect: (val:string) => void,
-};
 export type MediaPaginationContextType = {
   totalPages:number,
   setTotalPages:(val:number)=>void,
