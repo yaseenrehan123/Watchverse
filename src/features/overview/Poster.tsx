@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { useOverviewDataContext } from '../../contexts/OverviewDataContext';
+import { useOverviewDataStore } from '../../zustand-stores/useOverviewDataStore';
 
 const Poster = () => {
     const [posterImgError, setPosterImgError] = useState<boolean>(false);
-    const {posterImgSrc} = useOverviewDataContext();
+    const posterImgSrc = useOverviewDataStore((s)=>s.value.posterImgSrc);
     return (
         <div className='h-80 w-56 shadow-black shadow-2xl scale-75 lg:scale-100'>
             {(!posterImgError && posterImgSrc)

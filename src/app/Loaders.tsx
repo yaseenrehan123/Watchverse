@@ -1,5 +1,5 @@
 import React from 'react'
-import LoadGenresStore from '../loaders/loadGenresStore'
+import LoadGenresStore from '../loaders/LoadGenresStore'
 import LoadCountriesStore from '../loaders/LoadCountriesStore'
 
 const Loaders = () => {

@@ -28,6 +28,9 @@ export type CountriesDataStore = {
   countries:CountriesData[],
   status:Status
 }
+export type OverviewDataStore = {
+  value:OverviewContainerProps
+}
 //PROPS
 export type NavlinkProps = {
   content: string,

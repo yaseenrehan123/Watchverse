@@ -1,8 +1,14 @@
 import React from 'react'
-import { useOverviewDataContext } from '../../contexts/OverviewDataContext'
+import { useOverviewDataStore } from '../../zustand-stores/useOverviewDataStore';
 
 const Metadata = () => {
-    const {releaseDate,genre,casts,duration,country,production} = useOverviewDataContext();
+    const releaseDate = useOverviewDataStore((s)=>s.value.releaseDate);
+    const genre = useOverviewDataStore((s)=>s.value.genre);
+    const casts = useOverviewDataStore((s)=>s.value.casts);
+    const duration = useOverviewDataStore((s)=>s.value.duration);
+    const country = useOverviewDataStore((s)=>s.value.country);
+    const production = useOverviewDataStore((s)=>s.value.production);
+
     return (
         <div className='grid grid-cols-1 justify-center gap-1.5 max-w-3xl lg:grid-cols-2 lg:gap-20'>
             <div className='flex flex-col gap-1.5 text-left'>

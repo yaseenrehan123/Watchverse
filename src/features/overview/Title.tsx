@@ -1,8 +1,8 @@
 import React from 'react'
-import { useOverviewDataContext } from '../../contexts/OverviewDataContext'
+import { useOverviewDataStore } from '../../zustand-stores/useOverviewDataStore';
 
 const Title = () => {
-    const {title} = useOverviewDataContext();
+    const title = useOverviewDataStore((s)=>s.value.title);
     return (
         <div className='flex items-center justify-center'>
             <span className='font-anton text-3xl tracking-wider'>{title}</span>

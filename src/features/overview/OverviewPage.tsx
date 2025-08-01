@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import type {OverviewContainerProps,} from '../../types';
+import type { OverviewContainerProps, } from '../../types';
 import useFetchMediaItem from '../../hooks/useFetchMediaDetails';
 import LoadingText from '../../components/utilComponents/LoadingText';
 import ErrorText from '../../components/utilComponents/ErrorText';
 import OverviewContainer from './OverviewContainer';
 import useFetchMediaCredits from '../../hooks/useFetchMediaCredits';
-
 import mergedStatusResult from '../../utils/mergedStatusResult';
 import getOverviewContainerProps from '../../utils/getOverviewContainerProps';
-import { OverviewDataContextProvider } from '../../contexts/OverviewDataContext';
 import isCategoryFilter from '../../utils/isCategoryFilter';
+import { useOverviewDataStore } from '../../zustand-stores/useOverviewDataStore';
 
 const OverviewPage = () => {
   const { type, id } = useParams();
@@ -52,15 +51,14 @@ const OverviewPage = () => {
       );
     }
     console.log("DETAILS:", mediaData);
-    const castNames:string[] = creditsData?.cast?.slice(0, 5).map((actor: any) => actor.name) || [];
-    let props: OverviewContainerProps = getOverviewContainerProps(type!,mediaData!,castNames!);
-
+    const castNames: string[] = creditsData?.cast?.slice(0, 5).map((actor: any) => actor.name) || [];
+    let props: OverviewContainerProps = getOverviewContainerProps(type!, mediaData!, castNames!);
+    useOverviewDataStore.setState({
+      value: props
+    });
     return (
       <div className='pt-9 flex items-center flex-col gap-5 relative'>
-        <OverviewDataContextProvider value={props}>
-           <OverviewContainer/>
-        </OverviewDataContextProvider>
-       
+        <OverviewContainer />
       </div>
     );
   }

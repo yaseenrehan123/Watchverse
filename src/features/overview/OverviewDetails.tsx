@@ -1,8 +1,8 @@
 import React from 'react'
-import { useOverviewDataContext } from '../../contexts/OverviewDataContext'
+import { useOverviewDataStore } from '../../zustand-stores/useOverviewDataStore';
 
 const OverviewDetails = () => {
-    const {overview} = useOverviewDataContext();
+    const overview = useOverviewDataStore((s)=>s.value.overview);
     return (
         <div className='flex flex-col items-baseline gap-2'>
             <span className='font-roboto font-bold'>Overview:</span>
