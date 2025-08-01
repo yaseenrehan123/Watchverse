@@ -1,11 +1,11 @@
 import React from 'react'
 import MediaPaginationButton from './MediaPaginationButton'
-import { useMediaPaginationContext } from '../../contexts/MediaPaginationContext';
 import { useSearchParams } from 'react-router-dom';
+import { usePaginationStore } from '../../zustand-stores/usePaginationStore';
 
 const MediaPagination = () => {
     const [searchParams,setSearchParams] = useSearchParams();
-    const {totalPages} = useMediaPaginationContext();
+    const totalPages = usePaginationStore((state)=>state.totalPages);
     const rawPage: number = Number(searchParams.get('page'));
     const currentPage:number = rawPage && Number(rawPage) > 0 ? Number(rawPage) : 1;
     const visiblePageCount = 5;

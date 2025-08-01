@@ -12,10 +12,6 @@ type StatusError = {
   message: string
 };
 //CONTEXT
-export type MediaPaginationContextType = {
-  totalPages:number,
-  setTotalPages:(val:number)=>void,
-};
 export type MediaGenreContextType = {
   genres:GenreData[],
   status:Status
@@ -28,6 +24,10 @@ export type MediaCountriesContextType = {
 export type SidebarStore = {
   enabled:boolean,
   setEnabled:(val:boolean)=>void
+}
+export type PaginationStore = {
+  totalPages:number,
+  setTotalPages:(val:number)=>void
 }
 //PROPS
 export type NavlinkProps = {

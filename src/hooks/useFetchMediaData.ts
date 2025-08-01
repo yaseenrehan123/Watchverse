@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type { CategoryFilter, FilterParams, SortFilter, Status, TMDBMovieData, TMDBResponse, TMDBTVData, useFetchMediaDataOptions, useFetchMediaDataResult } from "../types";
-import { useMediaPaginationContext } from "../contexts/MediaPaginationContext";
-import { useParams, useSearchParams } from "react-router-dom";
+import type { CategoryFilter, SortFilter, Status, TMDBResponse, useFetchMediaDataResult } from "../types";
+import { useSearchParams } from "react-router-dom";
 import useMediaFilters from "./useMediaFilters";
 import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
+import { usePaginationStore } from "../zustand-stores/usePaginationStore";
 
 export default function useFetchMediaData(): useFetchMediaDataResult {
     const [response, setResponse] = useState<TMDBResponse | undefined>();
@@ -31,7 +31,7 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
     if (genre) allFilters.push(`with_genres=${genre}`);
     if(year) allFilters.push(`primary_release_year=${year}`);
     if(country) allFilters.push(`with_origin_country=${country}`);
-    const { setTotalPages } = useMediaPaginationContext();
+    const setTotalPages = usePaginationStore((state)=>state.setTotalPages);
     useEffect(() => {
         const MOVIE_URL: string = query
             ? 'https://api.themoviedb.org/3/search/movie'
