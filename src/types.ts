@@ -16,10 +16,6 @@ export type SearchContextType = {
   searchValue: string,
   setSearchAndRedirect: (val:string) => void,
 };
-export type SidebarContextType = {
-  enabled: boolean,
-  setEnabled: Function
-};
 export type MediaPaginationContextType = {
   totalPages:number,
   setTotalPages:(val:number)=>void,
@@ -31,6 +27,11 @@ export type MediaGenreContextType = {
 export type MediaCountriesContextType = {
   countries:CountriesData[],
   status:Status
+}
+//STORES
+export type SidebarStore = {
+  enabled:boolean,
+  setEnabled:(val:boolean)=>void
 }
 //PROPS
 export type NavlinkProps = {
