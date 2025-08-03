@@ -1,40 +1,30 @@
 import { useEffect, useState } from "react";
 import type { CountriesData, Status } from "../types";
 import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
+import { useQuery } from "@tanstack/react-query";
 
-export default function useFetchMediaCountriesData(): { data: CountriesData[], status: Status } {
-    const [status, setStatus] = useState<Status | undefined>(undefined);
-    const [data, setData] = useState<CountriesData[]>([]);
-    useEffect(() => {
-        const fetchCountries = async () => {
-            try {
-               const OPTIONS = getTMDBFetchOptions();
-                const response = await fetch('https://api.themoviedb.org/3/configuration/countries', OPTIONS);
-                if (!response.ok) {
-                    setStatus({ state: 'Error', message: 'Something went wrong...' });
-                };
-                const data = await response.json();
-                setData(data);
-                setStatus({ state: 'Success' });
-            }
-            catch (error) {
-                setStatus({ state: 'Error', message: 'Unable To Fetch Countries' });
-            }
+export default function useFetchMediaCountriesData(): { data: CountriesData[] | undefined, status: Status } {
+    const fetchCountries = async (): Promise<CountriesData[]> => {
+
+        const response = await fetch('https://api.themoviedb.org/3/configuration/countries', getTMDBFetchOptions());
+        if (!response.ok) {
+            throw new Error("RESPONSE NOT OK!");
         };
-        fetchCountries();
-    }, []);
-    if (!status)
-        return {
-            data: [],
-            status: { state: 'Loading' }
-        }
-    if(status?.state === 'Success' && data === undefined){
-        setStatus({state:'Error',message:'Data unintentionally missing..'});
-        throw new Error("COUNTRIES DATA NOT FOUND ON SUCCESS!");
-    }
+        const data: CountriesData[] = await response.json();
+        return data;
+    };
+    
+    const {data, isLoading, isSuccess, isError, error } = useQuery({
+        queryFn:()=>fetchCountries(),
+        queryKey:["fetchMediaCountries"]
+    });
+     const status: Status = isLoading
+        ? { state: 'Loading' }
+        : isError ? { state: 'Error', message: error.message }
+            : isSuccess ? { state: 'Success' }
+                : { state: 'Error', message: 'Unidentified State' }
     return {
-        data:data!,
-        status:status
+        data:data,
+        status
     }
-
 }

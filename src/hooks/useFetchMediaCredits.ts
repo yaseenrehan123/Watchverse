@@ -22,7 +22,7 @@ export default function useFetchMediaCredits(type: CategoryFilter, id: string | 
         : isError ? { state: 'Error', message: error.message }
             : isSuccess ? { state: 'Success' }
                 : { state: 'Error', message: 'Unidentified State' }
-    console.log("CREDITS DATA:",data);
+
     return{
         data,
         status
