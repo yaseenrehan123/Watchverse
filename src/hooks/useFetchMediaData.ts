@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { CategoryFilter, SortFilter, Status, TMDBResponse, useFetchMediaDataResult } from "../types";
+import type { CategoryFilter, SortFilter, Status, FetchMediaResult, UseFetchMediaDataResult } from "../types";
 import { useSearchParams } from "react-router-dom";
 import useMediaFilters from "./useMediaFilters";
 import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import buildTMDBFilters from "../utils/buildTMDBFilters";
 import getTMDBUrl from "../utils/getTMDBUrl";
 
-export default function useFetchMediaData(): useFetchMediaDataResult {
+export default function useFetchMediaData(): UseFetchMediaDataResult {
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q') || '';
     const rawPage: number = Number(searchParams.get('page'));
@@ -20,22 +20,19 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
     const year: string = filters?.year ?? '';
     const country: string = filters?.country ?? '';
     const setTotalPages = usePaginationStore((state) => state.setTotalPages);
-    const fetchMedia = async (): Promise<TMDBResponse> => {
+    const fetchMedia = async (): Promise<FetchMediaResult> => {
         const baseURL = getTMDBUrl(category, query);
         const filters = buildTMDBFilters({ sort, genre, year, country });
         const queryString: string = query ? `?query=${encodeURIComponent(query)}` : '';
         const endpoint = `${baseURL}?${queryString}&page=${currentPage}&${filters.join('&')}`
-        try {
-            const response = await fetch(endpoint, getTMDBFetchOptions());
-            if (!response.ok) {
-                throw new Error("RESPONSE FAILED!");
-            }
-            const data: TMDBResponse = await response.json();
-            return data;
+
+        const response = await fetch(endpoint, getTMDBFetchOptions());
+        if (!response.ok) {
+            throw new Error("RESPONSE FAILED!");
         }
-        catch (error) {
-            throw new Error("FAILED TO FETCH TMDB DATA! " + error);
-        }
+        const data: FetchMediaResult = await response.json();
+        return data;
+
     };
     const { data, isLoading, isSuccess, isError, error } = useQuery({
         queryFn: () => fetchMedia(),
@@ -51,7 +48,7 @@ export default function useFetchMediaData(): useFetchMediaDataResult {
             setTotalPages(data.total_pages);
     }, [isSuccess]);
 
-    const result: useFetchMediaDataResult = {
+    const result: UseFetchMediaDataResult = {
         data: data,
         status: status!
     };

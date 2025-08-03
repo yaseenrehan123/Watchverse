@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { TMDBMovieData, TMDBTVData, useFetchMediaDataResult } from '../../types'
+import type { TMDBMovieData, TMDBTVData, UseFetchMediaDataResult } from '../../types'
 import LoadingText from '../utilComponents/LoadingText';
 import ErrorText from '../utilComponents/ErrorText';
 import ShowCard from './ShowCard';
@@ -7,7 +7,7 @@ import useFetchMediaData from '../../hooks/useFetchMediaData';
 import MediaPagination from './MediaPagination';
 
 const MediaContainer = () => {
-    const { data, status }: useFetchMediaDataResult = useFetchMediaData();
+    const { data, status }: UseFetchMediaDataResult = useFetchMediaData();
     if (status.state === 'Loading') {
         return <LoadingText content='Loading...' />
     }

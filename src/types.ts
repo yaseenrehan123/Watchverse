@@ -13,23 +13,23 @@ type StatusError = {
 };
 //STORES
 export type SidebarStore = {
-  enabled:boolean,
-  setEnabled:(val:boolean)=>void
+  enabled: boolean,
+  setEnabled: (val: boolean) => void
 }
 export type PaginationStore = {
-  totalPages:number,
-  setTotalPages:(val:number)=>void
+  totalPages: number,
+  setTotalPages: (val: number) => void
 }
 export type GenresDataStore = {
-  genres:GenreData[],
-  status:Status
+  genres: GenreData[],
+  status: Status
 }
 export type CountriesDataStore = {
-  countries:CountriesData[],
-  status:Status
+  countries: CountriesData[],
+  status: Status
 }
 export type OverviewDataStore = {
-  value:OverviewContainerProps
+  value: OverviewContainerProps
 }
 //PROPS
 export type NavlinkProps = {
@@ -41,54 +41,47 @@ export type ShowCardProps = {
   rating: string,
   year: string,
   title: string,
-  link:string
+  link: string
 };
 export type MediaPaginationButtonProps = {
-  content:string,
-  selected:boolean,
-  onClick:()=>void
+  content: string,
+  selected: boolean,
+  onClick: () => void
 }
 export type OverviewContainerProps = {
-  backdropImgSrc:string,
-  posterImgSrc:string,
-  title:string,
-  overview:string,
-  releaseDate:string,
-  duration:string,
-  genre:string[],
-  casts:string[],
-  country:string,
-  production:string[]
+  backdropImgSrc: string,
+  posterImgSrc: string,
+  title: string,
+  overview: string,
+  releaseDate: string,
+  duration: string,
+  genre: string[],
+  casts: string[],
+  country: string,
+  production: string[]
 }
 export type FilterOptionProps = {
-  value:string,
-  title:string,
-  enabled?:boolean,
-  selected?:boolean,
-  onClick?:()=>void
+  value: string,
+  title: string,
+  enabled?: boolean,
+  selected?: boolean,
+  onClick?: () => void
 }
 export type FilterOptionsContainerProps = {
-  section:string,
-  options:{label:string,value:string,onSelected?:Function}[],
-  filterKey:keyof FilterParams
-  multiple?:boolean,
-  enabled:boolean,
-  defaultValues?:string[]
+  section: string,
+  options: { label: string, value: string, onSelected?: Function }[],
+  filterKey: keyof FilterParams
+  multiple?: boolean,
+  enabled: boolean,
+  defaultValues?: string[]
 }
 export type MediaFiltersContainerProps = {
-  enableCategoryFilter:boolean,
-  enableSortFilter:boolean,
-  enableYearFilter:boolean,
-  enableGenreFilter:boolean,
-  enableCountryFilter:boolean
+  enableCategoryFilter: boolean,
+  enableSortFilter: boolean,
+  enableYearFilter: boolean,
+  enableGenreFilter: boolean,
+  enableCountryFilter: boolean
 }
-//HOOK TYPES
-export type TMDBResponse = {
-  page: number;
-  results: TMDBMovieData[];
-  total_pages: number;
-  total_results: number;
-};
 //GENERAL
 export type TMDBMovieData = {
   adult: boolean;
@@ -174,35 +167,48 @@ export type TMDBTVDetails = {
   created_by: { id: number; name: string }[];
 };
 export type GenreData = {
-  id:number,
-  name:string
+  id: number,
+  name: string
 }
-export type CountriesData ={
-  english_name:string,
-  iso_3166_1:string,
-  native_name:string
+export type CountriesData = {
+  english_name: string,
+  iso_3166_1: string,
+  native_name: string
 }
 export type Status = StatusSuccess | StatusLoading | StatusError;
 export type CategoryFilter = "movie" | "tv";
 export type SortFilter = 'popularity' | 'trending' | 'new' | 'top_imdb';
 export type FilterParams = {
-  category?:CategoryFilter,
-  sort?:SortFilter,
-  genre?:string,
-  year?:string,
-  country?:string
+  category?: CategoryFilter,
+  sort?: SortFilter,
+  genre?: string,
+  year?: string,
+  country?: string
 };
 export type FilterOption = {
-  label:string,
-  value:string
+  label: string,
+  value: string
 }
 //RETURN TYPES
-export type useFetchMediaDataResult = {
-  data: TMDBResponse | undefined,
+export type FetchMediaResult = {
+  page: number;
+  results: TMDBMovieData[];
+  total_pages: number;
+  total_results: number;
+};
+export type FetchGenresResult = {
+  genres: GenreData[]
+}
+export type UseFetchMediaDataResult = {
+  data: FetchMediaResult | undefined,
   status: Status
 };
+export type UseFetchMediaGenresResult = {
+  data: FetchGenresResult | undefined,
+  status: Status
+}
 //FUNCTION OPTIONS
-export type useFetchMediaDataOptions = {
+export type UseFetchMediaDataOptions = {
   type: CategoryFilter,
   filter?: SortFilter
 }
