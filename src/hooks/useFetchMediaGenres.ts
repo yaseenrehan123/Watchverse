@@ -14,7 +14,7 @@ export default function useFetchMediaGenres():UseFetchMediaGenresResult {
     }
     const { data, isLoading, isError, error, isSuccess } = useQuery({
         queryFn: () => fetchGenres(),
-        queryKey: []
+        queryKey: ["fetchMediaGenres"]
     });
     const status: Status = isLoading
         ? { state: 'Loading' }

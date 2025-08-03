@@ -199,7 +199,12 @@ export type FetchMediaResult = {
 export type FetchGenresResult = {
   genres: GenreData[]
 }
-export type FetchDetailsResult = TMDBMovieDetails | TMDBTVData;
+export type FetchDetailsResult = TMDBMovieDetails | TMDBTVDetails;
+export type FetchCreditsResult = {
+  cast:CastItem[],
+  crew:any[],
+  id:number
+}
 export type UseFetchMediaDataResult = {
   data: FetchMediaResult | undefined,
   status: Status
@@ -210,6 +215,10 @@ export type UseFetchMediaGenresResult = {
 }
 export type useFetchMediaDetailsResult = {
   data:FetchDetailsResult | undefined,
+  status:Status
+}
+export type useFetchMediaCreditsResult = {
+  data:FetchCreditsResult | undefined,
   status:Status
 }
 //FUNCTION OPTIONS

@@ -14,7 +14,7 @@ export default function useFetchMediaDetails(type: CategoryFilter, id: string | 
     }
     const { data, isLoading, isError, error, isSuccess } = useQuery({
         queryFn: () => fetchDetails(),
-        queryKey: [type, id],
+        queryKey: [type, id,"fetchMediDetails"],
         enabled: !!type && !!id
     });
     const status: Status = isLoading

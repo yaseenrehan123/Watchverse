@@ -36,7 +36,7 @@ export default function useFetchMediaData(): UseFetchMediaDataResult {
     };
     const { data, isLoading, isSuccess, isError, error } = useQuery({
         queryFn: () => fetchMedia(),
-        queryKey: [category, sort, genre, year, country, currentPage, query]
+        queryKey: [category, sort, genre, year, country, currentPage, query,"fetchMediaData"]
     });
     const status: Status = isLoading
         ? { state: 'Loading' }
