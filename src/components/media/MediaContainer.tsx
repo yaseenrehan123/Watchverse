@@ -3,7 +3,7 @@ import type { TMDBMovieData, TMDBTVData, UseFetchMediaDataResult } from '../../t
 import LoadingText from '../utilComponents/LoadingText';
 import ErrorText from '../utilComponents/ErrorText';
 import ShowCard from './ShowCard';
-import useFetchMediaData from '../../hooks/useFetchMediaData';
+import useFetchMediaData from '../../hooks/fetch/useFetchMediaData';
 import MediaPagination from './MediaPagination';
 
 const MediaContainer = () => {

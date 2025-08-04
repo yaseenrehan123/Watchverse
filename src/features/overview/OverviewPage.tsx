@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import type { OverviewContainerProps, } from '../../types';
-import useFetchMediaItem from '../../hooks/useFetchMediaDetails';
+import useFetchMediaItem from '../../hooks/fetch/useFetchMediaDetails';
 import LoadingText from '../../components/utilComponents/LoadingText';
 import ErrorText from '../../components/utilComponents/ErrorText';
 import OverviewContainer from './OverviewContainer';
-import useFetchMediaCredits from '../../hooks/useFetchMediaCredits';
+import useFetchMediaCredits from '../../hooks/fetch/useFetchMediaCredits';
 import mergedStatusResult from '../../utils/mergedStatusResult';
 import getOverviewContainerProps from '../../utils/getOverviewContainerProps';
 import isCategoryFilter from '../../utils/isCategoryFilter';

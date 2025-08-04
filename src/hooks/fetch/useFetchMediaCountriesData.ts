@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { CountriesData, Status } from "../types";
-import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
+import type { CountriesData, Status } from "../../types";
+import getTMDBFetchOptions from "../../utils/getTMDBFetchOptions";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useFetchMediaCountriesData(): { data: CountriesData[] | undefined, status: Status } {

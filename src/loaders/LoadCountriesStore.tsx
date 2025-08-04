@@ -1,5 +1,5 @@
 import React from 'react'
-import useFetchMediaCountriesData from '../hooks/useFetchMediaCountriesData';
+import useFetchMediaCountriesData from '../hooks/fetch/useFetchMediaCountriesData';
 import { useCountriesDataStore } from '../zustand-stores/useCountriesDataStore';
 
 const LoadCountriesStore = () => {

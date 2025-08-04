@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import type { CategoryFilter, SortFilter, Status, FetchMediaResult, UseFetchMediaDataResult } from "../types";
+import type { CategoryFilter, SortFilter, Status, FetchMediaResult, UseFetchMediaDataResult } from "../../types";
 import { useSearchParams } from "react-router-dom";
-import useMediaFilters from "./useMediaFilters";
-import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
-import { usePaginationStore } from "../zustand-stores/usePaginationStore";
+import useMediaFilters from "../useMediaFilters";
+import getTMDBFetchOptions from "../../utils/getTMDBFetchOptions";
+import { usePaginationStore } from "../../zustand-stores/usePaginationStore";
 import { useQuery } from "@tanstack/react-query";
-import buildTMDBFilters from "../utils/buildTMDBFilters";
-import getTMDBUrl from "../utils/getTMDBUrl";
+import buildTMDBFilters from "../../utils/buildTMDBFilters";
+import getTMDBUrl from "../../utils/getTMDBUrl";
 
 export default function useFetchMediaData(): UseFetchMediaDataResult {
     const [searchParams] = useSearchParams();

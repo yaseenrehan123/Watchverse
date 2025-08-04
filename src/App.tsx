@@ -9,8 +9,7 @@ import TvShowsPage from './features/tvshows/TvShowsPage'
 import TopImdbPage from './features/topImdb/TopImdbPage'
 import OverviewPage from './features/overview/OverviewPage'
 import SearchPage from './app/SearchPage'
-import useFetchMediaGenres from './hooks/useFetchMediaGenres'
-import { useGenresDataStore } from './zustand-stores/useGenresDataStore'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const router = createBrowserRouter([
   {
@@ -30,8 +29,12 @@ const router = createBrowserRouter([
 ])
 
 const App = () => {
+  const client = new QueryClient();
   return (
-    <RouterProvider router={router} />
+    <QueryClientProvider client={client}>
+       <RouterProvider router={router} />
+    </QueryClientProvider>
+   
   )
 }
 export default App

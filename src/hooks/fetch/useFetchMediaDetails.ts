@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Status, CategoryFilter, TMDBMovieDetails, TMDBTVDetails, FetchDetailsResult, useFetchMediaDetailsResult } from "../types";
-import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
+import type { Status, CategoryFilter, TMDBMovieDetails, TMDBTVDetails, FetchDetailsResult, useFetchMediaDetailsResult } from "../../types";
+import getTMDBFetchOptions from "../../utils/getTMDBFetchOptions";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useFetchMediaDetails(type: CategoryFilter, id: string | undefined): useFetchMediaDetailsResult {

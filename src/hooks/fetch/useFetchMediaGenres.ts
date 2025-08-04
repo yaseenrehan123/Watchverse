@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type {FetchGenresResult, Status, UseFetchMediaGenresResult } from "../types";
-import getTMDBFetchOptions from "../utils/getTMDBFetchOptions";
+import type {FetchGenresResult, Status, UseFetchMediaGenresResult } from "../../types";
+import getTMDBFetchOptions from "../../utils/getTMDBFetchOptions";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useFetchMediaGenres():UseFetchMediaGenresResult {
