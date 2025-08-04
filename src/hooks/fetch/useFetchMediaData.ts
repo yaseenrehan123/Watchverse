@@ -23,9 +23,9 @@ export default function useFetchMediaData(): UseFetchMediaDataResult {
     const fetchMedia = async (): Promise<FetchMediaResult> => {
         const baseURL = getTMDBUrl(category, query);
         const filters = buildTMDBFilters({ sort, genre, year, country });
-        const queryString: string = query ? `?query=${encodeURIComponent(query)}` : '';
+        const queryString: string = query ? `query=${encodeURIComponent(query)}` : '';
         const endpoint = `${baseURL}?${queryString}&page=${currentPage}&${filters.join('&')}`
-
+        
         const response = await fetch(endpoint, getTMDBFetchOptions());
         if (!response.ok) {
             throw new Error("RESPONSE FAILED!");

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import HomePage from './features/home/HomePage'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom'
 import LandingPage from './features/landing/LandingPage'
 import Layout from './app/Layout'
 import NotFoundPage from './app/NotFoundPage'
@@ -11,7 +11,7 @@ import OverviewPage from './features/overview/OverviewPage'
 import SearchPage from './app/SearchPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Layout />,
@@ -26,10 +26,7 @@ const router = createBrowserRouter([
     ],
     errorElement: <NotFoundPage />
   }
-],{
-  basename:process.env.NODE_ENV === 'production' ? '/Watchverse/' : '/'
-}
-)
+])
 
 const App = () => {
   const client = new QueryClient();
