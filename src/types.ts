@@ -1,5 +1,3 @@
-import type { TMDB_FILTERS } from "./utils/filters";
-
 //PRIVATE
 type StatusLoading = {
   state: 'Loading'
