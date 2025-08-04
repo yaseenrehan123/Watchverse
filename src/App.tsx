@@ -26,7 +26,10 @@ const router = createBrowserRouter([
     ],
     errorElement: <NotFoundPage />
   }
-])
+],{
+  basename:process.env.NODE_ENV === 'production' ? '/Watchverse' : '/'
+}
+)
 
 const App = () => {
   const client = new QueryClient();
