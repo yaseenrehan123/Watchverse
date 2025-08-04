@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />
   }
 ],{
-  basename:process.env.NODE_ENV === 'production' ? '/Watchverse' : '/'
+  basename:process.env.NODE_ENV === 'production' ? '/Watchverse/' : '/'
 }
 )
 
