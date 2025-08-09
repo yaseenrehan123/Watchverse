@@ -7,11 +7,11 @@ const Searchbar = () => {
   const [selected, setSelected] = useState<boolean>(false);
   const setSearchAndRedirect = useSetSearchAndRedirect();
   const handleSearch = () => {
-    console.log("HANDLE SEARCH CALLED");
+    //console.log("HANDLE SEARCH CALLED");
     if (inputValue.trim() !== '') {
       setSearchAndRedirect(inputValue);
       setInputValue('');
-      console.log("SEARCHED!");
+      //console.log("SEARCHED!");
     }
   }
 

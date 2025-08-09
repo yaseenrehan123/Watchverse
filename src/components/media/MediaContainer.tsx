@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
 import type { TMDBMovieData, TMDBTVData, UseFetchMediaDataResult } from '../../types'
-import LoadingText from '../utilComponents/LoadingText';
-import ErrorText from '../utilComponents/ErrorText';
 import ShowCard from './ShowCard';
 import useFetchMediaData from '../../hooks/fetch/useFetchMediaData';
 import MediaPagination from './MediaPagination';
+import StatusText from '../ui/statusText';
 
 const MediaContainer = () => {
     const { data, status }: UseFetchMediaDataResult = useFetchMediaData();
     if (status.state === 'Loading') {
-        return <LoadingText content='Loading...' />
+        return <StatusText variant='loadingText'>Loading...</StatusText>
     }
     if (status.state === 'Error') {
-        return <ErrorText content={`${status.message}`} />
+        return <StatusText variant='errorText'>Error: {status.message}</StatusText>
     }
     if (status.state === 'Success') {
-        console.log(data);
+        //console.log(data);
         return (
             <div className='flex items-center justify-center gap-5 flex-wrap w-full'>
                 {data?.results.map((item: TMDBMovieData | TMDBTVData) => {

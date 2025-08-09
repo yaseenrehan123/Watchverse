@@ -2,21 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import type { OverviewContainerProps, } from '../../types';
 import useFetchMediaItem from '../../hooks/fetch/useFetchMediaDetails';
-import LoadingText from '../../components/utilComponents/LoadingText';
-import ErrorText from '../../components/utilComponents/ErrorText';
 import OverviewContainer from './OverviewContainer';
 import useFetchMediaCredits from '../../hooks/fetch/useFetchMediaCredits';
 import mergedStatusResult from '../../utils/mergedStatusResult';
 import getOverviewContainerProps from '../../utils/getOverviewContainerProps';
 import isCategoryFilter from '../../utils/isCategoryFilter';
 import { useOverviewDataStore } from '../../zustand-stores/useOverviewDataStore';
+import StatusText from '@/components/ui/statusText';
 
 const OverviewPage = () => {
   const { type, id } = useParams();
   if (type === undefined || !isCategoryFilter(type)) {
     return (
       <div className='pt-13 flex items-center flex-col'>
-        <ErrorText content={'Unrecognized Url!'} />
+        <StatusText variant='errorText'>Unrecognized URL!</StatusText>
       </div>
     );
   }
@@ -27,7 +26,7 @@ const OverviewPage = () => {
   if (status.state === 'Loading') {
     return (
       <div className='pt-13 flex items-center flex-col'>
-        <LoadingText content='Loading...' />
+        <StatusText variant='loadingText'>Loading...</StatusText>
       </div>
     );
   }
@@ -36,7 +35,7 @@ const OverviewPage = () => {
   if (status.state === 'Error') {
     return (
       <div className='pt-13 flex items-center flex-col'>
-        <ErrorText content={status.message} />
+       <StatusText variant='errorText'>{status.message}</StatusText>
       </div>
     );
   }
@@ -46,11 +45,11 @@ const OverviewPage = () => {
     if (!(mediaData || creditsData)) {
       return (
         <div className='pt-13 flex items-center flex-col'>
-          <ErrorText content={'Unable To Load Data! Unknown Error'} />
+          <StatusText variant='errorText'>Unable To Load Data!</StatusText>
         </div>
       );
     }
-    console.log("DETAILS:", mediaData);
+    //console.log("DETAILS:", mediaData);
     const castNames: string[] = creditsData?.cast?.slice(0, 5).map((actor: any) => actor.name) || [];
     let props: OverviewContainerProps = getOverviewContainerProps(type!, mediaData!, castNames!);
     useOverviewDataStore.setState({

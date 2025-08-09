@@ -95,6 +95,8 @@ export type SearchSuggestionsCardProps = {
 export type SearchSuggestionsContainerProps = {
   inputValue:string
 }
+//UI COMPONENT PROPS
+export type StatusTextProps = React.HTMLAttributes<HTMLDivElement> & StatusTextVariants;
 //GENERAL
 export type TMDBMovieData = {
   adult: boolean;
@@ -247,4 +249,8 @@ export type useFetchMediaCreditsResult = {
 export type UseFetchMediaDataOptions = {
   type: CategoryFilter,
   filter?: SortFilter
+}
+//UI COMPONENT VARIANTS
+export type StatusTextVariants = {
+  variant?:'default'|'errorText'|'loadingText'|'successText'
 }
