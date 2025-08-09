@@ -29,6 +29,10 @@ export type CountriesDataStore = {
 export type OverviewDataStore = {
   value: OverviewContainerProps
 }
+//CONTEXT
+export type SuggestionsCardContext = {
+  value:SearchSuggestionsCardProps
+}
 //PROPS
 export type NavlinkProps = {
   content: string,
@@ -79,6 +83,17 @@ export type MediaFiltersContainerProps = {
   enableYearFilter: boolean,
   enableGenreFilter: boolean,
   enableCountryFilter: boolean
+}
+export type SearchSuggestionsCardProps = {
+  posterImgSrc:string,
+  title:string,
+  year:string,
+  duration:string,
+  category:string,
+  link:string
+}
+export type SearchSuggestionsContainerProps = {
+  inputValue:string
 }
 //GENERAL
 export type TMDBMovieData = {
@@ -187,6 +202,15 @@ export type FilterOption = {
   label: string,
   value: string
 }
+export type TMDBMovieSuggestion = TMDBMovieData & {
+  media_type:"movie"
+}
+export type TMDBTVSuggestion = TMDBTVData & {
+  media_type:"tv"
+}
+export type TMDBSuggestion =
+  | TMDBMovieSuggestion
+  | TMDBTVSuggestion
 //RETURN TYPES
 export type FetchMediaResult = {
   page: number;
