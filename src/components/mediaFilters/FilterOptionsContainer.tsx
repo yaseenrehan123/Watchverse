@@ -5,7 +5,7 @@ import FilterOption from './FilterOption'
 import useMediaFilters from '../../hooks/useMediaFilters';
 import ColumnDividerThin from '../utilComponents/ColumnDividerThin';
 
-const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey,defaultValues }: FilterOptionsContainerProps) => {
+const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey, defaultValues }: FilterOptionsContainerProps) => {
   const storageKey: string = `filterOptionsHidden-${section}`
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [hidden, setHidden] = useState<boolean>(() => sessionStorage.getItem(storageKey) === 'true');
@@ -21,9 +21,43 @@ const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey
     setHidden(newVal);
     sessionStorage.setItem(storageKey, JSON.stringify(newVal));
   }
-  useEffect(()=>{
+  const handleSelect = (value:string)=>{
+    if(!enabled) return;
+
+    if(!multiple){
+      setSelectedValues([value]);
+      setFilters({
+        [filterKey]:value
+      });
+      return;
+    }
+
+    if(value === ''){
+      setSelectedValues(['']);
+      setFilters({
+        [filterKey]:''
+      });
+      return;
+    }
+
+    const alreadySelected = selectedValues.includes(value);
+    let newValues:string[];
+
+    if(alreadySelected){
+      newValues = selectedValues.filter(v=>v !== value);
+    }
+    else{
+      newValues = [...selectedValues.filter(v=>v !== ''),value];
+    }
+
+    setSelectedValues(newValues);
+    setFilters({
+      [filterKey]:newValues.join(',')
+    });
+  }
+  useEffect(() => {
     setSelectedValues(getInitial())
-  },[filters])
+  }, [filters])
   return (
     <div className='flex flex-col gap-3.5 items-start w-full'>
       <ColumnDividerThin />
@@ -43,42 +77,13 @@ const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey
                 value={option.value}
                 title={option.label}
                 selected={selectedValues.includes(option.value)}
-                onClick={() => {
-                  if (!enabled) return;
-                  if (multiple) {
-                    if (selectedValues.includes(option.value)) {
-                      const newValues = selectedValues.filter(v => v !== option.value);
-                      setSelectedValues(newValues);
-                      setFilters({
-                        [filterKey]: newValues.join(',')
-                      });
-                    }
-                    else {
-                      const newValues = [...selectedValues, option.value];
-                      setSelectedValues(newValues);
-                      setFilters({
-                        [filterKey]: newValues.join(','),
-                      });
-                    }
-                  }
-                  else {
-                    setSelectedValues([]);
-                    setSelectedValues([option.value]);
-                    setFilters({
-                      [filterKey]: option.value
-                    });
-                    console.log("FILTERS:", filters);
-                  }
-                  console.log("OPTION CLICKED!");
-                }}
+                onClick={()=>handleSelect(option.value)}
                 enabled={enabled}
               />
             ))}
           </motion.div>}
         </AnimatePresence>
       </MotionConfig>
-
-
     </div>
 
   )
