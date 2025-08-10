@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import type { FilterOptionsContainerProps, FilterParams } from '../../types'
+import type { FilterOptionsContainerProps} from '../../types'
 import FilterOption from './FilterOption'
 import useMediaFilters from '../../hooks/useMediaFilters';
-import ColumnDividerThin from '../utilComponents/ColumnDividerThin';
+import ColumnDivider from '../ui/columnDivider';
 
 const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey, defaultValues }: FilterOptionsContainerProps) => {
   const storageKey: string = `filterOptionsHidden-${section}`
@@ -60,7 +60,7 @@ const FilterOptionsContainer = ({ section, options, multiple, enabled, filterKey
   }, [filters])
   return (
     <div className='flex flex-col gap-3.5 items-start w-full'>
-      <ColumnDividerThin />
+      <ColumnDivider variant='sm'/>
       <span className='font-roboto font-bold text-[20px] hover:cursor-pointer hover:text-gray-500 hover:scale-98'
         onClick={toggleVisibility}>{section}</span>
       <MotionConfig transition={{ type: 'spring', duration: 0.5, bounce: 0.2 }}>

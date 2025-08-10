@@ -98,6 +98,7 @@ export type SearchSuggestionsContainerProps = {
 //UI COMPONENT PROPS
 export type StatusTextProps = React.HTMLAttributes<HTMLDivElement> & StatusTextVariants;
 export type ResponsiveProps = React.HTMLAttributes<HTMLDivElement> & ResponsiveVariants;
+export type ColumnDividerProps = React.HTMLAttributes<HTMLDivElement> & ColumnDividerVariants;
 //GENERAL
 export type TMDBMovieData = {
   adult: boolean;
@@ -260,4 +261,7 @@ export type ResponsiveVariants = {
   sm?:'default'|'block'|'hidden'|'flex'|'inlineBlock',
   md?:'default'|'block'|'hidden'|'flex'|'inlineBlock',
   lg?:'default'|'block'|'hidden'|'flex'|'inlineBlock',
+}
+export type ColumnDividerVariants = {
+  variant?:'sm'|'md'|'lg'|'xl'
 }
