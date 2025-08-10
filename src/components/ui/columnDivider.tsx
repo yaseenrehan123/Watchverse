@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils'
-import type { ColumnDividerProps } from '@/types'
+import type { RowDividerProps } from '@/types'
 import { cva } from 'class-variance-authority'
 import React from 'react'
 
-const ColumnDivider = ({variant,className,children,...props}:ColumnDividerProps) => {
+const ColumnDivider = ({variant,className,children,...props}:RowDividerProps) => {
   return (
     <div {...props} className={cn(variants({variant}),className)}>{children}</div>
   )

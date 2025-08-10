@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSuggestionsCardContext } from '../../../contexts/SuggestionsCardContext'
-import DotDividerSmall from '../../utilComponents/DotDividerSmall';
+import RowDivider from '@/components/ui/rowDivider';
 
 const CardInfo = () => {
     const {value} = useSuggestionsCardContext();
@@ -14,11 +14,11 @@ const CardInfo = () => {
                 <div className='text-gray-500 font-montserrat'>
                     {value.year}
                 </div>
-                <DotDividerSmall/>
+                <RowDivider variant='sm'/>
                  <div className='text-gray-500 font-montserrat'>
                     {value.duration}min
                 </div>
-                <DotDividerSmall/>
+                <RowDivider variant='sm'/>
                 <div className='text-gray-500 font-montserrat'>
                     {value.category}
                 </div>

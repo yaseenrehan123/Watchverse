@@ -1,5 +1,4 @@
 import React from 'react'
-import DotDividerSmall from '../../utilComponents/DotDividerSmall'
 import type { SearchSuggestionsCardProps } from '../../../types'
 import { SuggestionsCardContextProvider } from '../../../contexts/SuggestionsCardContext'
 import CardImage from './CardImage'
