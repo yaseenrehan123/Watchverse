@@ -97,6 +97,7 @@ export type SearchSuggestionsContainerProps = {
 }
 //UI COMPONENT PROPS
 export type StatusTextProps = React.HTMLAttributes<HTMLDivElement> & StatusTextVariants;
+export type ResponsiveProps = React.HTMLAttributes<HTMLDivElement> & ResponsiveVariants;
 //GENERAL
 export type TMDBMovieData = {
   adult: boolean;
@@ -253,4 +254,10 @@ export type UseFetchMediaDataOptions = {
 //UI COMPONENT VARIANTS
 export type StatusTextVariants = {
   variant?:'default'|'errorText'|'loadingText'|'successText'
+}
+export type ResponsiveVariants = {
+  display?:'block'|'inline'|'inlineBlock'|'flex'|'inlineFlex'|'grid'|'hidden',
+  sm?:'default'|'block'|'hidden'|'flex'|'inlineBlock',
+  md?:'default'|'block'|'hidden'|'flex'|'inlineBlock',
+  lg?:'default'|'block'|'hidden'|'flex'|'inlineBlock',
 }
