@@ -1,6 +1,6 @@
 import React from 'react'
 //import RedirectingSearchbar from '../../components/Searchbar/RedirectingSearchbar'
-import ViewFullSiteBtn from '../../components/ViewFullSiteBtn'
+import ViewFullSiteBtn from '../../components/utilComponents/ViewFullSiteBtn'
 import Searchbar from '../../components/Searchbar/Searchbar'
 
 const LandingPageHeader = () => {
