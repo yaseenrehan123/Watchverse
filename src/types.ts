@@ -88,7 +88,6 @@ export type SearchSuggestionsCardProps = {
   posterImgSrc:string,
   title:string,
   year:string,
-  duration:string,
   category:string,
   link:string
 }
@@ -211,7 +210,7 @@ export type TMDBMovieSuggestion = TMDBMovieData & {
   media_type:"movie"
 }
 export type TMDBTVSuggestion = TMDBTVData & {
-  media_type:"tv"
+  media_type:"tv",
 }
 export type TMDBSuggestion =
   | TMDBMovieSuggestion

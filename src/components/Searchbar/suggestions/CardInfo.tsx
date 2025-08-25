@@ -15,10 +15,6 @@ const CardInfo = () => {
                     {value.year}
                 </div>
                 <RowDivider variant='sm'/>
-                 <div className='text-gray-500 font-montserrat'>
-                    {value.duration}min
-                </div>
-                <RowDivider variant='sm'/>
                 <div className='text-gray-500 font-montserrat'>
                     {value.category}
                 </div>

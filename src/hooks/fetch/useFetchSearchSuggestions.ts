@@ -42,6 +42,7 @@ export default function useFetchSearchSuggestions(query: string): { data: any, s
             : isSuccess ? { state: 'Success' }
                 : { state: 'Error', message: 'Unidentified State' }
 
+    console.log("SUGGESTIONS DATA: ",data);
     return {
         data,
         status

@@ -17,6 +17,7 @@ const SuggestionsContainer = ({ inputValue }: SearchSuggestionsContainerProps) =
       //console.log("SEARCHED!");
     }
   }
+  
   return (
     <div className='w-full bg-gray-800 absolute inset-full left-0 z-5 flex items-center flex-col'>
 
@@ -45,7 +46,6 @@ const SuggestionsContainer = ({ inputValue }: SearchSuggestionsContainerProps) =
                     posterImgSrc={props.posterImgSrc}
                     title={props.title}
                     year={props.year}
-                    duration={props.duration}
                     category={props.category}
                     link={props.link}
                   />
