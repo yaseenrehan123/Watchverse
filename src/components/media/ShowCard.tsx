@@ -33,7 +33,7 @@ const ShowCard = ({ imgSrc, rating, year, title: name, link }: ShowCardProps) =>
             <div className='w-3/4 h-8 bg-gray-700 hover:bg-gray-600'>
                 <button className='w-full h-full flex items-center justify-center gap-2 hover:cursor-pointer'>
                     <FaPlay className='text-white' />
-                    <Link to={link}><span>Checkout</span></Link>
+                    <Link to={link}><span>More Info</span></Link>
                 </button>
             </div>
         </div>
